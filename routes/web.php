@@ -23,6 +23,10 @@ Route::get('/', function () {
 
 Route::get('/login', [ConnectController::class, 'getLogin'])->name('login');
 Route::post('/login', [ConnectController::class, 'postlogin'])->name('login');
+Route::get('/recover', [ConnectController::class, 'getRecover'])->name('recover');
+Route::post('/recover', [ConnectController::class, 'postRecover'])->name('recover');
+Route::get('/reset', [ConnectController::class, 'getReset'])->name('reset');
+Route::post('/reset', [ConnectController::class, 'postReset'])->name('reset');
 Route::get('/register', [ConnectController::class, 'getRegister'])->name('register');
 Route::post('/register', [ConnectController::class, 'postRegister'])->name('register');
 Route::get('/logout', [ConnectController::class, 'getLogout'])->name('logout');

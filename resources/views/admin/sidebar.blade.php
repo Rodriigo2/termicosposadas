@@ -24,7 +24,7 @@
                 <a href="{{ url('/admin/categories/0') }}" class="lk-categories lk-category_add lk-category_edit lk-category_delete"><i class="fa-regular fa-folder-closed"></i> Categorías</a>
             </li>
             <li>
-                <a href="{{ url('/admin/users') }}" class="lk-user_list"><i class="fa-solid fa-users"></i> Usuarios</a>
+                <a href="{{ url('/admin/users/all') }}" class="lk-user_list lk-user_edit"><i class="fa-solid fa-users"></i> Usuarios</a>
             </li>
         </ul>
     </div>
