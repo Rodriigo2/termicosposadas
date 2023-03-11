@@ -19,6 +19,7 @@ Route::get('/', function () {
 });
 
 
+
 //Routers AUTH
 
 Route::get('/login', [ConnectController::class, 'getLogin'])->name('login');

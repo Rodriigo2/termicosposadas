@@ -8,6 +8,8 @@ Route::prefix('/admin')->group(function(){
     Route::get('/users/{status}','App\Http\Controllers\Admin\UserController@getUsers')->name('user_list');
     Route::get('/users/{id}/edit','App\Http\Controllers\Admin\UserController@getUserEdit')->name('user_edit');
     Route::get('/users/{id}/banned','App\Http\Controllers\Admin\UserController@getUserBanned')->name('user_banned');
+    Route::get('/users/{id}/permissions','App\Http\Controllers\Admin\UserController@getUserPermissions')->name('user_permissions');
+    Route::post('/users/{id}/permissions','App\Http\Controllers\Admin\UserController@postUserPermissions')->name('user_permissions');
 
     //Module products
     Route::get('/products','App\Http\Controllers\Admin\ProductController@getHome')->name('products');

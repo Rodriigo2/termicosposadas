@@ -14,18 +14,26 @@
     </div>
     <div class="main">
         <ul>
+            @if(kvfj(Auth::user()->permissions, 'dashboard'))
             <li>
                 <a href="{{ url('/admin') }}" class="lk-dashboard"><i class="fa-solid fa-house-chimney"></i> Dashboard</a>
             </li>
+            @endif
+            @if(kvfj(Auth::user()->permissions, 'products'))
             <li>
                 <a href="{{ url('/admin/products') }}" class="lk-products lk-product_add lk-product_edit lk-product_gallery_add"><i class="fa-solid fa-boxes-stacked"></i> Productos</a>
             </li>
+            @endif
+            @if(kvfj(Auth::user()->permissions, 'categories'))
             <li>
                 <a href="{{ url('/admin/categories/0') }}" class="lk-categories lk-category_add lk-category_edit lk-category_delete"><i class="fa-regular fa-folder-closed"></i> Categorías</a>
             </li>
+            @endif
+            @if(kvfj(Auth::user()->permissions, 'user_list'))
             <li>
                 <a href="{{ url('/admin/users/all') }}" class="lk-user_list lk-user_edit"><i class="fa-solid fa-users"></i> Usuarios</a>
             </li>
+            @endif
         </ul>
     </div>
 </div>

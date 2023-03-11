@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Nette\Utils\Validators;
 use Validator, Hash, Auth, Mail, Str;
 use App\Mail\UserSendRecover;
+use App\Mail\UserSendNewPassword;
 use App\Models\User;
 
 class ConnectController extends Controller
@@ -168,7 +169,9 @@ class ConnectController extends Controller
                 $user->password = Hash::make($new_password);
                 $user->password_code = null;
                 if($user->save()):
-                    return redirect('/login')->with('message','La contraseña fue reestablecida con éxito, ahora puede iniciar sesión.')->with('typealert','success');
+                    $data = ['name'=>$user->name,'password'=> $new_password];
+                    Mail::to($user->email)->send(new UserSendNewPassword($data));
+                    return redirect('/login')->with('message','La contraseña fue reestablecida con éxito, Hemos enviado un correo electrónico con su nueva contraseña para que pueda iniciar sesión.')->with('typealert','success');
                 endif;
             else:
                 return back()->with('message','El correo electrónico o el código de recuperación son erróneos.')->with('typealert','danger');

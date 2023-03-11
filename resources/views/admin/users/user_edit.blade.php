@@ -50,10 +50,12 @@
                           <span class="text">{{ getRoleUserArray(null , $u->role)}}</span>
                         </span>
                       </div>
+                      @if(kvfj(Auth::user()->permissions, 'user_banned'))
                       @if($u->status == "100")
                       <a href="{{ url('/admin/users/'.$u->id.'/banned') }}" class="btn btn-success">Activar Usuario</a>
                       @else
                       <a href="{{ url('/admin/users/'.$u->id.'/banned') }}" class="btn btn-danger">Suspender Usuario</a>
+                      @endif
                       @endif
                 </div>
                 </div>

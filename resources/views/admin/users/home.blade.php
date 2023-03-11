@@ -12,7 +12,7 @@
 <div class="container-fluid">
     <div class="panel shadow">
         <div class="header">
-            <h2 class="tittle"><i class="fa-solid fa-users"></i>Usuarios</h2>
+            <h2 class="tittle"><i class="fa-solid fa-users"></i> Usuarios</h2>
         </div>
         <div class="inside">
             <div class="row">
@@ -52,8 +52,12 @@
                         <td>{{ getRoleUserArray(null, $user->role) }}</td>
                         <td>
                             <div class="opts">
+                            @if(kvfj(Auth::user()->permissions, 'user_edit'))
                             <a href="{{ url('/admin/users/'.$user->id.'/edit') }}" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fa-solid fa-user-pen"></i></a>
-                            
+                            @endif
+                            @if(kvfj(Auth::user()->permissions, 'user_permissions'))
+                            <a href="{{ url('/admin/users/'.$user->id.'/permissions') }}" data-toggle="tooltip" data-placement="top" title="Permisos de usuario"><i class="fa-solid fa-gear"></i></a>
+                            @endif
                         </div>
                         </td>
                     </tr>

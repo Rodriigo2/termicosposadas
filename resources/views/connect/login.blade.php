@@ -10,6 +10,7 @@
     </div>
     <div class="inside">
     {!! Form::open(['url' => '/login']) !!}
+    @csrf
     <label for="email">Correo electrónico:</label>
     <div class="input-group">
             <div class="input-group-text"><i class="fa-solid fa-envelope"></i></div>

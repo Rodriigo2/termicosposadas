@@ -10,7 +10,7 @@
     </div>
     <div class="inside">
     {!! Form::open(['url' => '/register']) !!}
-
+    @csrf
     <label for="name">Nombre:</label>
     <div class="input-group">
             <div class="input-group-text"><i class="fa-solid fa-user"></i></div>

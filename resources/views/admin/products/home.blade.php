@@ -12,13 +12,15 @@
 <div class="container-fluid">
     <div class="panel shadow">
         <div class="header">
-            <h2 class="tittle"><i class="fa-solid fa-boxes-stacked"></i>Productos</h2>
+            <h2 class="tittle"><i class="fa-solid fa-boxes-stacked"></i> Productos</h2>
         </div>
         <div class="inside">
-
+            @if(kvfj(Auth::user()->permissions, 'products_add'))
             <div class="btns mtop16">
                 <a href="{{url('/admin/product/add')}}" class="btn btn-primary"><i class="fa-solid fa-square-plus"></i> Agregar producto</a>
+                @endif
             </div>
+
             <table class="table table-striped mtop16">
                 <thead>
                     <tr>
@@ -43,8 +45,12 @@
                             <td>{{ $p->cat->name }}</td>
                             <td>{{ $p->price }}</td>
                             <td><div class="opts">
+                                @if(kvfj(Auth::user()->permissions, 'products_edit'))
                                 <a href="{{ url('/admin/product/'.$p->id.'/edit') }}" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fa-solid fa-user-pen"></i></a>
+                                @endif
+                                @if(kvfj(Auth::user()->permissions, 'products_delete'))
                                 <a href="{{ url('/admin/product/'.$p->id.'/delete') }}" data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="fa-solid fa-trash"></i></a>
+                                @endif
                             </div></td>
                         </tr>
                     @endforeach

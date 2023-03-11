@@ -9,7 +9,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class UserSendRecover extends Mailable
+class UserSendNewPassword extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -28,7 +28,7 @@ class UserSendRecover extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Recuperar su contraseña',
+            subject: 'Su nueva contraseña',
         );
     }
 
@@ -38,8 +38,8 @@ class UserSendRecover extends Mailable
     public function build()
     {
         return $this->from(env('MAIL_FROM_NAME'), env('APP_NAME'))
-        ->view('emails.user_password_recover')
-        ->subject('Recuperar su contraseña')
+        ->view('emails.user_send_new_password')
+        ->subject('Su nueva contraseña')
         ->with($this->data);
     }
 
