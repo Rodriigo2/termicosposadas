@@ -26,10 +26,24 @@
             </div>
 
             <div class="form-check">
+                <input type="checkbox" value="true" name="products_search" @if (kvfj($u->permissions, 'products_search')) checked
+                    
+                @endif>
+                <label for="products_search">Puede buscar productos.</label>
+            </div>
+
+            <div class="form-check">
                 <input type="checkbox" value="true" name="products_delete" @if (kvfj($u->permissions, 'products_delete')) checked
                     
                 @endif>
                 <label for="products_delete">Puede eliminar productos.</label>
+            </div>
+
+            <div class="form-check">
+                <input type="checkbox" value="true" name="products_restore" @if (kvfj($u->permissions, 'products_restore')) checked
+                    
+                @endif>
+                <label for="products_restore">Puede restaurar productos.</label>
             </div>
 
             <div class="form-check">

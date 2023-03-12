@@ -79,6 +79,25 @@
                 </div>
 
             </div>
+
+            <div class="row mtop16">
+                <div class="col-md-3">
+                    <label for="inventory">Inventario:</label>
+                    <div class="input-group">
+                        <div class="input-group-text"><i class="fa-solid fa-keyboard"></i></div>
+                        {!! form::number('inventory', $p->inventory, ['class' => 'form-control', 'min'=>'0.00']) !!}
+                </div>
+                </div>
+
+                <div class="col-md-3">
+                    <label for="code">Código de sistema:</label>
+                    <div class="input-group">
+                        <div class="input-group-text"><i class="fa-solid fa-keyboard"></i></div>
+                        {!! form::text('code', $p->code, ['class' => 'form-control']) !!}
+                </div>
+                </div>
+            </div>
+
             <div class="row">
                 <div class="col-md-12">
                     <label for="content">Descripción</label>

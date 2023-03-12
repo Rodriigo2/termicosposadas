@@ -10,6 +10,21 @@
                 @endif>
                 <label for="dashboard">Puede ver el dashboard.</label>
             </div>
+
+            <div class="form-check">
+                <input type="checkbox" value="true" name="dashboard_small_stats" @if (kvfj($u->permissions, 'dashboard_small_stats')) checked
+                    
+                @endif>
+                <label for="dashboard_small_stats">Puede ver el las estadisticas rápidas.</label>
+            </div>
+
+            <div class="form-check">
+                <input type="checkbox" value="true" name="dashboard_sell_today" @if (kvfj($u->permissions, 'dashboard_sell_today')) checked
+                    
+                @endif>
+                <label for="dashboard_sell_today">Puede ver lo facturado del día.</label>
+            </div>
         </div>
+
     </div>
 </div>

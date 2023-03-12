@@ -68,7 +68,25 @@
                     <h2 class="tittle"><i class="fa-solid fa-pen-to-square"></i>Editar información</h2>
                 </div>
                 <div class="inside">
-        
+                    @if(kvfj(Auth::user()->permissions, 'user_edit'))
+                    {!! Form::Open(['url' => '/admin/users/'.$u->id.'/edit']) !!}
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="module">Tipo de usuario:</label>
+                <div class="input-group">
+                    <div class="input-group-text"><i class="fa-solid fa-keyboard"></i></div>
+                    {!! Form::select('user_type', getRoleUserArray('list', null), $u->role, ['class' => 'form-select']) !!}
+                </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row mtop16">
+                        <div class="col-md-12">
+                            {!! Form::submit('Guardar', ['class' => 'btn btn-success']) !!}
+                        </div>
+                    </div>
+                    {!! Form::close() !!}
+                    @endif
                 </div>
             </div>
         </div>

@@ -4,7 +4,7 @@
 
 @section('breadcrumb')
 <li class="breadcrumb-item">
-    <a href="{{url('/admin/products/1')}}"><i class="fa-solid fa-boxes-stacked"></i>Productos</a>
+    <a href="{{url('/admin/products')}}"><i class="fa-solid fa-boxes-stacked"></i>Productos</a>
 </li>
 @endsection
 
@@ -91,22 +91,11 @@
                                 <a href="{{ url('/admin/product/'.$p->id.'/edit') }}" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fa-solid fa-user-pen"></i></a>
                                 @endif
                                 @if(kvfj(Auth::user()->permissions, 'products_delete'))
-                                @if(is_null($p->deleted_at))
-                                <a href="" data-action="delete" data-path="admin/product" data-object="{{ $p->id }}" data-toggle="tooltip" data-placement="top" title="Eliminar" class="btn-deleted"><i class="fa-solid fa-trash"></i>
-                                </a>
-                                @else
-                                @if(kvfj(Auth::user()->permissions, 'products_restore'))
-                                <a href="{{url('/admin/product/'.$p->id.'/restore')}}" data-action="restore" data-path="admin/product" data-object="{{ $p->id }}" data-toggle="tooltip" data-placement="top" title="Restaurar" class="btn-deleted"><i class="fa-solid fa-trash-can-arrow-up"></i>
-                                </a>
-                                @endif
-                                @endif
+                                <a href="{{ url('/admin/product/'.$p->id.'/delete') }}" data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="fa-solid fa-trash"></i></a>
                                 @endif
                             </div></td>
                         </tr>
                     @endforeach
-                    <tr>
-                        <td colspan="6">{!! $products->links('pagination::bootstrap-4', ['class' => 'pagination-links']) !!}</td>
-                    </tr>
                 </tbody>
             </table>
         </div>
