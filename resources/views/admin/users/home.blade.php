@@ -33,6 +33,7 @@
                 <thead>
                     <tr>
                         <td>ID</td>
+                        <td></td>
                         <td>Nombre</td>
                         <td>Apellido</td>
                         <td>Email</td>
@@ -45,6 +46,11 @@
                     @foreach($users as $user)
                     <tr>
                         <td>{{ $user->id }}</td>
+                        <td width="48">@if(is_null($user->avatar))
+                            <img src="{{url('/static/images/default-avatar.png')}}" class="img-fluid rounded-circle">
+                            @else
+                            <img src="{{url('/uploads_users/'.Auth::id().'/av_'.Auth::user()->avatar)}}" class="img-fluid rounded-circle">
+                            @endif</td>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->lastname }}</td>
                         <td>{{ $user->email }}</td>

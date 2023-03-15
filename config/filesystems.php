@@ -49,6 +49,11 @@ return [
             'root' => 'D:/xampp/www/termicosposadas/public/uploads',
         ],
 
+        'uploads_user' => [
+            'driver' => 'local',
+            'root' => 'D:/xampp/www/termicosposadas/public/uploads_users',
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),

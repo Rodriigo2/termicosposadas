@@ -64,15 +64,14 @@ function delete_object(e){
         text = "Esta acción restaurará este elemento y estará en la base de datos";
         icon = "info";
     }
-    swal({
+    swal.fire({
         title: title,
         text: text,
         icon: icon,
-        buttons: true,
-        dangerMode: true,
+        showCancelButton: true,
       })
-      .then((willDelete) => {
-        if (willDelete) {
+      .then((result) => {
+        if (result.isConfirmed) {
             window.location.href = url;
         }
       });

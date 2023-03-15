@@ -22,7 +22,7 @@
                     @if(is_null($u->avatar))
                     <img src="{{url('/static/images/default-avatar.png')}}" class="avatar">
                     @else
-                    <img src="{{url('/uploads/user/'.$u->id.'/'.$user->avatar)}}" class="avatar">
+                    <img src="{{url('/uploads_users/'.Auth::id().'/av_'.Auth::user()->avatar)}}" class="avatar">
                     @endif
                     <div class="info">
                         <span class="title">
@@ -72,7 +72,7 @@
                     {!! Form::Open(['url' => '/admin/users/'.$u->id.'/edit']) !!}
                     <div class="row">
                         <div class="col-md-6">
-                            <label for="module">Tipo de usuario:</label>
+                <label for="module">Tipo de usuario:</label>
                 <div class="input-group">
                     <div class="input-group-text"><i class="fa-solid fa-keyboard"></i></div>
                     {!! Form::select('user_type', getRoleUserArray('list', null), $u->role, ['class' => 'form-select']) !!}

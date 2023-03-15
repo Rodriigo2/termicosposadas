@@ -97,7 +97,50 @@ function user_permissions(){
                         'user_permissions' => 'Puede administrar permisos de usuarios.'
                     ]
                     ],
+            'settings' =>[
+                        'icon' => '<i class="fa-solid fa-gear"></i>',
+                'title' => 'Módulo de Configuraciones',
+                'keys' => [
+                        'settings' => 'Puede modificar la configuración.'
+                    ]
+                ],
+                'orders' =>[
+                    'icon' => '<i class="fa-solid fa-clipboard-list"></i>',
+            'title' => 'Módulo de Ordenes',
+            'keys' => [
+                    'orders_list' => 'Puede ver el listado de ordenes.'
+                ]
+                ]
     ];
     return $p;
 }
 
+function getUserYears(){
+    $ya = date('Y');
+    $ym = $ya - 18;
+    $yold = $ym - 62;
+
+    return [$ym,$yold];
+}
+
+function getMoths($mode, $key){
+    $m = [
+        '1' => 'Enero',
+        '2' => 'Febrero',
+        '3' => 'Marzo',
+        '4' => 'Abril',
+        '5' => 'Mayo',
+        '6' => 'Junio',
+        '7' => 'Julio',
+        '8' => 'Agosto',
+        '9' => 'Septiembre',
+        '10' => 'Octubre',
+        '11' => 'Noviembre',
+        '12' => 'Diciembre'
+    ];
+    if($mode == "list"){
+        return $m;
+    }else{
+        return $m[$key];
+    }
+}

@@ -4,6 +4,11 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('/admin')->group(function(){
     Route::get('/','App\Http\Controllers\Admin\DashboardController@getDashboard')->name('dashboard'); 
 
+    //Module Settings
+    Route::get('/settings','App\Http\Controllers\Admin\SettingsController@getHome')->name('settings');
+    Route::post('/settings','App\Http\Controllers\Admin\SettingsController@postHome')->name('settings');
+    
+
     //Module Users
     Route::get('/users/{status}','App\Http\Controllers\Admin\UserController@getUsers')->name('user_list');
     Route::get('/users/{id}/edit','App\Http\Controllers\Admin\UserController@getUserEdit')->name('user_edit');
