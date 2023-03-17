@@ -21,7 +21,7 @@
                 </div>
                 <div class="inside">
                     @if(kvfj(Auth::user()->permissions, 'category_add'))
-                    {!! Form::open(['url' => '/admin/category/add']) !!}
+                    {!! Form::open(['url' => '/admin/category/add', 'files' => true]) !!}
                     <label for="name">Nombre:</label>
                     <div class="input-group">
                         <div class="input-group-text"><i class="fa-solid fa-keyboard"></i></div>
@@ -32,13 +32,13 @@
                 <div class="input-group">
                     <div class="input-group-text"><i class="fa-solid fa-keyboard"></i></div>
                     {!! Form::select('module', getModulesArray(), 0, ['class' => 'form-select']) !!}
-            </div>
+
 
             <label for="icon" class="mtop16">Ícono:</label>
-                    <div class="input-group">
-                        <div class="input-group-text"><i class="fa-solid fa-keyboard"></i></div>
-                    {!! Form::text('icon', null, ['class' => 'form-control']) !!}
-                </div>
+            <div class="input-group mb-3">
+                <label class="input-group-text" for="inputGroupFile01">Upload</label>
+            {!! Form::file('icon', ['class' => 'form-control', 'required' ,'id' => 'inputGroupFile01', 'accept'=>'image/*']) !!}
+            </div>
 
                 {!! Form::submit('Guardar',['class' => 'btn btn-success mtop16']) !!}
                     {!! Form::close() !!}
@@ -52,7 +52,7 @@
                 <h2 class="tittle"><i class="fa-regular fa-folder-closed"></i>Categorías</h2>
             </div>
             <div class="inside">
-                <nav class="nav nav-pills nav-fill col-md-3">
+                <nav class="nav nav-pills nav-fill col-md-12">
                     @foreach(getModulesArray() as $m => $k)
                     <a class="nav-link" href="{{url('/admin/categories/'.$m)}}"><i class="fa-solid fa-list"></i>{{ $k }}</a>
                     @endforeach
@@ -60,7 +60,7 @@
                 <table class="table mtop16">
                     <thead>
                         <tr>
-                            <td width='32px'></td>
+                            <td width='64px'></td>
                             <td>Nombre</td>
                             <td width="140px"></td>
                         </tr>
@@ -68,7 +68,9 @@
                     <tbody>
                         @foreach ($cats as $cat)
                             <tr>
-                                <td>{!! htmlspecialchars_decode($cat->icono) !!}</td>
+                                <td>@if(!is_null($cat->icono))
+                                    <img src="{{url ('/uploads/'.$cat->file_path.'/'.$cat->icono)}}" class="img-fluid">
+                                @endif</td>
                                 <td>{{ $cat->name }}</td>
                                 <td>
                                     <div class="opts">

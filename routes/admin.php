@@ -36,5 +36,9 @@ Route::prefix('/admin')->group(function(){
     Route::get('/category/{id}/edit', 'App\Http\Controllers\Admin\CategoriesController@getCategoryEdit')->name('category_edit');
     Route::post('/category/{id}/edit', 'App\Http\Controllers\Admin\CategoriesController@postCategoryEdit')->name('category_edit');
     Route::get('/category/{id}/delete', 'App\Http\Controllers\Admin\CategoriesController@getCategoryDelete')->name('category_delete');
+
+
+    //Sliders
+    Route::get('/sliders', 'App\Http\Controllers\Admin\SlidersController@getHome')->name('sliders_list');
 });
 ?>

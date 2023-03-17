@@ -97,6 +97,15 @@ function user_permissions(){
                         'user_permissions' => 'Puede administrar permisos de usuarios.'
                     ]
                     ],
+
+                    'sliders' =>[
+                        'icon' => '<i class="fa-solid fa-images"></i>',
+                'title' => 'Módulo de sliders',
+                'keys' => [
+                        'sliders_list' => 'Puede ver la lista de Sliders.',
+                        'sliders_add' => 'Puede crear sliders'
+                    ]
+                ],
             'settings' =>[
                         'icon' => '<i class="fa-solid fa-gear"></i>',
                 'title' => 'Módulo de Configuraciones',

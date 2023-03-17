@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title') - TermicosPosadas</title>
     <meta name="csrf-token" content="{{csrf_token()}}">
@@ -20,6 +20,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
 {{-- <script src="//cdn.ckeditor.com/4.20.2/standard/ckeditor.js"></script> --}}
+<script src="{{url('/static/js/mdslider.js?v='.time())}}"></script>
 <script src="{{url('/static/js/site.js?v='.time())}}"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
@@ -31,23 +32,23 @@
     <nav class="navbar navbar-expand-lg shadow">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}"><img src="{{ url('/static/images/banner.png') }}"></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navigationMain" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
     
-            <div class="collapse navbar-collapse">
+            <div class="collapse navbar-collapse" id="navigationMain">
                 <ul class="navbar-nav ms-auto"> <!-- Agrega la clase "ms-auto" aquí -->
                     <li class="nav-item">
-                        <a href="{{ url('/') }}" class="nav-link"><i class="fa-solid fa-house"></i> Inicio</a>
+                        <a href="{{ url('/') }}" class="nav-link"><i class="fa-solid fa-house"></i> <span>Inicio</span></a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url('/') }}" class="nav-link"><i class="fa-solid fa-store"></i> Tienda</a>
+                        <a href="{{ url('/') }}" class="nav-link"><i class="fa-solid fa-store"></i> <span>Tienda</span></a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url('/') }}" class="nav-link"><i class="fa-solid fa-id-card-clip"></i> Sobre Nosotros</a>
+                        <a href="{{ url('/') }}" class="nav-link"><i class="fa-solid fa-id-card-clip"></i> <span>Sobre Nosotros</span></a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url('/') }}" class="nav-link"><i class="fa-solid fa-address-book"></i> Contactos</a>
+                        <a href="{{ url('/') }}" class="nav-link"><i class="fa-solid fa-address-book"></i> <span>Contactos</span></a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ url('/car') }}" class="nav-link"><i class="fa-solid fa-cart-shopping"></i> <span class="carnumber">0</span></a>

@@ -29,6 +29,11 @@ nav
     .navbar-brand
         img
             width 200px
+    .navbar-toggler
+        &:active
+        &:focus
+            outline none
+            box-shadow none
    .navbar-nav
   li.nav-item
     a.nav-link
@@ -220,6 +225,199 @@ nav
     &:hover
         background-color #1a1b1c
         color #fff
+
+.home_action_bar
+    background-color #e6e6e6
+    // border 1px solid #8C8888
+    border-radius 4px
+    padding 16px
+    margin-top 24px
+    .categories
+        position relative
+        a
+            background-color #020303
+            border-radius 4px
+            color #e6e6e6
+            display block
+            padding 12px
+            text-transform uppercase
+            text-decoration none
+            width 100%
+            &:hover
+                background-color #444444
+        &:active
+        &:focus
+            a
+                background-color #444444
+        &:hover
+            ul
+                display block
+        ul
+            display none
+            list-style none
+            margin 0px
+            padding 0px
+            position absolute
+            width 100%
+            li
+                a
+                    background-color #fff
+                    border-radius 0px
+                    color #020303
+                    img
+                        position relative
+                        margin-top -5px
+                        margin-right 12px
+                        width 20px
+                    &:hover
+                        color #fff
+    .input-group
+        position relative
+        i
+            position absolute
+            font-size 1.4em
+            top 14px
+            left 6px
+            z-index 10
+        .form-control
+            border-radius 4px 0px 0px 4px
+            padding 10px 16px
+            padding-left 46px
+            z-index 2
+            &:focus
+                border 1px solid #24a3fc
+                &::placeholder
+                    color #24a3fc
+        &:focus-within
+            i
+                color #24a3fc
+        .btn
+            background-color #020303
+            color #fff
+            &:hover
+                background-color #24a3fc
+                color #fff
+
+.mdslider
+    display flex
+    flex-wrap wrap
+    margin-top 24px
+    min-height 380px
+    overflow hidden
+    position relative
+    width 100%
+    .md-slider-item
+        align-items center
+        border-right 1px solid #fff
+        border-radius 4px
+        display none
+        background-color #020303
+        color #fff
+        font-size 4em
+        justify-content center
+        position absolute
+        min-height 380px
+        transition .4s all ease-in-out
+        width 100% !important
+    ul.navigation
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        transform: translateY(-50%);
+        z-index: 9;
+        top calc(50% - 18px)
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+
+        li
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 10px;
+            i
+                position relative
+                left -25px
+                font-size 1.8em
+                color #fff
+                z-index 1
+            a
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-decoration: none;
+                height: 36px;
+                width: 36px;
+                background-color: rgba(0, 0, 0, 0.5);
+                border-radius: 50%;
+                color: #fff;
+                line-height: 36px // Corrección aquí
+                position: relative;
+                z-index: 2;
+                
+            &:first-child
+                margin-left 32px
+            &:last-child
+                margin-right 32px
+                float right
+
+
+
+@media only screen and (max-width: 728px)
+  nav
+    .navbar-nav
+      display block !important
+      margin-top 16px
+      overflow hidden
+      li.nav-item
+        float left
+        display block
+        margin-right 0
+        margin-bottom 12px
+        width 50%;
+        a.nav-link
+            text-align center
+            span
+                display block
+                font-size 1em
+                font-weight normal
+                margin-top 4px
+                width 100%
+          i
+            font-size 3em
+        &:last-child
+          float right
+          width 100%;
+      li.link-acc
+        a
+            font-size 1.2em
+            width 50% !important
+            i
+                font-size 1em !important
+      li.link-user
+        border 1px solid #8C8888
+        border-radius 6px
+        padding 8px
+        a
+            // border-bottom 1px solid #8C8888 !important
+            display block
+            font-size 1.2em !important
+            width 100% !important
+            img
+                width 36px !important
+        ul.dropdown-menu
+            // border-top 1px solid #8C8888 !important
+            top 0px !important
+        ul.shadow
+            box-shadow none !important
+    
+
+
 
 
 

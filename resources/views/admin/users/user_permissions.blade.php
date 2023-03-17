@@ -20,7 +20,7 @@
 
             <div class="row">
                 @foreach (user_permissions() as $key => $value)
-                <div class="col-md-4 d-flex mb16">
+                <div class="col-md-4 d-flex mb16 mtop16">
                     <div class="panel shadow">
                         <div class="header">
                             <h2 class="tittle">{!!$value['icon']!!} {{$value['title']}} </h2>
