@@ -103,7 +103,9 @@ function user_permissions(){
                 'title' => 'Módulo de sliders',
                 'keys' => [
                         'sliders_list' => 'Puede ver la lista de Sliders.',
-                        'sliders_add' => 'Puede crear sliders'
+                        'sliders_add' => 'Puede crear sliders',
+                        'sliders_edit' => 'Puede editar sliders',
+                        'sliders_delete' => 'Puede borrar sliders'
                     ]
                 ],
             'settings' =>[

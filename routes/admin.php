@@ -40,5 +40,9 @@ Route::prefix('/admin')->group(function(){
 
     //Sliders
     Route::get('/sliders', 'App\Http\Controllers\Admin\SlidersController@getHome')->name('sliders_list');
+    Route::post('/slider/add', 'App\Http\Controllers\Admin\SlidersController@postSliderAdd')->name('sliders_add');
+    Route::get('/slider/{id}/edit', 'App\Http\Controllers\Admin\SlidersController@getEditSlider')->name('sliders_edit');
+    Route::post('/slider/{id}/edit', 'App\Http\Controllers\Admin\SlidersController@postEditSlider')->name('sliders_edit');
+    Route::get('/slider/{id}/delete', 'App\Http\Controllers\Admin\SlidersController@getDeleteSlider')->name('sliders_delete');
 });
 ?>

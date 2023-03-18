@@ -68,6 +68,14 @@
                         </div>
                 </div>
 
+                <div class="col-md-3">
+                    <label for="status">Estado:</label>
+                    <div class="input-group">
+                        <div class="input-group-text"><i class="fa-solid fa-keyboard"></i></div>
+                        {!! Form::select('status', ['0' => 'Borrador', '1' => 'Público'], 1, ['class' => 'form-select']) !!}
+                </div>
+                </div>
+
             </div>
 
             <div class="row mtop16">

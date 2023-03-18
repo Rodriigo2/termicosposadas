@@ -302,7 +302,7 @@ nav
     display flex
     flex-wrap wrap
     margin-top 24px
-    min-height 380px
+    min-height 520px
     overflow hidden
     position relative
     width 100%
@@ -311,14 +311,41 @@ nav
         border-right 1px solid #fff
         border-radius 4px
         display none
-        background-color #020303
+        background-color #e6e6e6
         color #fff
-        font-size 4em
         justify-content center
         position absolute
         min-height 380px
         transition .4s all ease-in-out
         width 100% !important
+        .col-md-7
+        .col-md-5
+            padding 0px
+        .row
+            margin 0px
+            padding 0px
+        .content
+            align-items center
+            color #020303
+            display flex
+            height 100%
+            justify-content center
+            h2
+            p
+                display block
+                width 100%
+            .cinside
+                text-align center
+                border-left 2px solid #020303
+                padding-left 20px
+                max-width 80%
+                h2
+                    font-size 2em
+                .btn
+                    background-color #020303
+                    color #e6e6e6
+                    display inline-flex
+                    margin 0px auto
     ul.navigation
         display: flex;
         justify-content: space-between;
@@ -344,7 +371,7 @@ nav
                 position relative
                 left -25px
                 font-size 1.8em
-                color #fff
+                color #020303
                 z-index 1
             a
                 display: flex;
@@ -366,6 +393,91 @@ nav
                 margin-right 32px
                 float right
 
+.products_list
+    display block
+    margin-top 32px
+    padding 0px
+    overflow hidden
+    width 100%
+    .product
+        display inline-block
+        float left
+        margin-bottom 24px
+        margin-right 2.5%
+        position relative
+        width 18%
+        &:nth-child(5n)
+            margin-right 0px
+        .image
+            display block
+            width 100%
+            position relative
+            overflow hidden
+            .overlay
+                position absolute
+                background-color rgba(0, 0, 0, .5)
+                border-radius 4px
+                display none
+                flex 1
+                height 100%
+                width 100%
+                transition .3s all ease-in-out
+                z-index 9
+                .btns
+                    display block
+                    bottom 8px
+                    position absolute
+                    left 3%
+                    overflow hidden
+                    width 94%
+                    a
+                        background-color #e6e6e6
+                        border-radius 4px
+                        box-sizing border-box
+                        color #020303
+                        display block
+                        font-size 1.2em
+                        float left
+                        margin-right 2%
+                        padding 6px
+                        text-align center
+                        width 32%
+                        &:last-child
+                            margin-right 0px
+            img
+                display block
+                border-radius 4px
+                width 100%
+                transform scale(1)
+                transition .3s all ease-in-out
+                z-index 4
+        &:hover
+            .image
+                img
+                    transform scale(1.1)
+                .overlay
+                    display flex
+        a
+            display block
+            text-decoration none
+            width 100%
+            position relative
+            .title
+            .price
+            .options
+                display block
+                width 100%
+            .title
+                margin-top 8px
+            .title
+                font-size 1.2em
+                color #020303
+            .price
+                font-size 1.4em
+                margin-top 4px
+                font-weight bold
+                color #020303
+                    
 
 
 @media only screen and (max-width: 728px)

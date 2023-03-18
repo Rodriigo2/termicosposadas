@@ -12,7 +12,7 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-3">
             @if(kvfj(Auth::user()->permissions, 'sliders_add'))
             <div class="panel shadow">
                 <div class="header">
@@ -35,7 +35,7 @@
             <label for="img" class="mtop16">Imagen Destacada:</label>
             <div class="input-group mb-3">
                 <label class="input-group-text" for="inputGroupFile01">Upload</label>
-            {!! Form::file('img', ['class' => 'form-control', 'required' ,'id' => 'inputGroupFile01', 'accept'=>'image/*']) !!}
+            {!! Form::file('img', ['class' => 'form-control' ,'id' => 'inputGroupFile01', 'accept'=>'image/*']) !!}
             </div>
 
             <label for="name" class="mtop16">Contenido:</label>
@@ -47,17 +47,57 @@
                 <label for="sorder" class="mtop16">Orden de aparición:</label>
                     <div class="input-group">
                         <div class="input-group-text"><i class="fa-solid fa-keyboard"></i></div>
-                    {!! Form::number('sorder', null, ['class' => 'form-control', 'min' => '0']) !!}
+                    {!! Form::number('sorder', 0, ['class' => 'form-control', 'min' => '0']) !!}
                 </div>
 
                 {!! Form::submit('Guardar',['class' => 'btn btn-success mtop16']) !!}
                     {!! Form::close() !!}
             @endif
         </div>
-        <div class="col-md-8">
-            
         </div>
     </div>
+    <div class="col-md-9">
+        <div class="panel shadow">
+            <div class="header">
+                <h2 class="tittle"><i class="fa-solid fa-images"></i> Sliders</h2>
+            </div>
+            <div class="inside">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($sliders as $slider)
+                            <tr>
+                                <td width="180px">
+                                    <img src="{{url('/uploads/'.$slider->file_path.'/'.$slider->file_name)}}" class="img-fluid">
+                                </td>
+                                <td>
+                                    <div class="slider_content">
+                                        <h1>{{ $slider->name }}</h1>
+                                    {!! html_entity_decode($slider->content) !!}
+                                </div>
+                                </td>
+                                <td width= "110px">
+                                    <div class="opts">
+                                        @if(kvfj(Auth::user()->permissions, 'sliders_edit'))
+                                        <a href="{{ url('/admin/slider/'.$slider->id.'/edit') }}" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fa-solid fa-user-pen"></i></a>
+                                        @endif
+                                        @if(kvfj(Auth::user()->permissions, 'sliders_delete'))
+                                        <a href="" data-action="delete" data-path="admin/slider" data-object="{{ $slider->id }}" data-toggle="tooltip" data-placement="top" title="Eliminar" class="btn-deleted"><i class="fa-solid fa-trash"></i>
+                                        </a>
+                                        @endif
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
 </div>
-
 @endsection

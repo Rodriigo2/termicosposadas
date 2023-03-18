@@ -37,3 +37,6 @@ Route::get('/logout', [ConnectController::class, 'getLogout'])->name('logout');
 Route::get('/account/edit', [UserController::class, 'getAccountEdit'])->name('account_edit');
 Route::post('account/edit/avatar', [UserController::class, 'postAccountAvatar'])->name('account_avatar_edit');Route::post('account/edit/password', [UserController::class, 'postAccountPassword'])->name('account_password_edit');
 Route::post('account/edit/info', [UserController::class, 'postAccountInfo'])->name('account_info_edit');
+
+//Ajax API Routers
+Route::get('/md/api/load/products/{section}', ['uses' => 'App\Http\Controllers\ApiJsController@getProductsSection'])->name('products_section');

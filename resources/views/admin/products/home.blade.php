@@ -84,7 +84,9 @@
                                 </a>
                             </td>
                             <td>{{ $p->name }} @if($p->status=="0") <i class="fa-solid fa-eraser" data-toggle="tooltip" data-placement="top" title="Estado: Borrador"></i> @endif</td>
-                            <td>{{ $p->cat->name }}</td>
+                            <td>
+                            {{ $p->cat->name ?? 'Ninguna' }}
+                            </td>
                             <td>{{ $p->price }}</td>
                             <td><div class="opts">
                                 @if(kvfj(Auth::user()->permissions, 'products_edit'))

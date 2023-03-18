@@ -87,6 +87,7 @@ class ProductController extends Controller
             $product->inventory = e($request->input('inventory'));
             $product->in_discount= $request->input('indiscount');
             $product->discount= $request->input('discount');
+            $product->status = $request->input('status');
             $product->content= e($request->input('content'));
             
             if($product->save()):
@@ -98,7 +99,7 @@ class ProductController extends Controller
                     });
                     $img->save($upload_path.'/'.$path.'/t_'.$filename);
                 endif;
-                return redirect('/admin/products')->with('message','Guardado con éxito.')->with('typealert','success');
+                return redirect('/admin/product/add')->with('message','Guardado con éxito.')->with('typealert','success');
             endif;
         endif;
 

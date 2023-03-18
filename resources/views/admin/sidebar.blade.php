@@ -42,7 +42,7 @@
 
             @if(kvfj(Auth::user()->permissions, 'sliders_list'))
             <li>
-                <a href="{{ url('/admin/sliders') }}" class="lk-sliders_list"><i class="fa-solid fa-images"></i> Sliders</a>
+                <a href="{{ url('/admin/sliders') }}" class="lk-sliders_list lk-sliders_edit"><i class="fa-solid fa-images"></i> Sliders</a>
             </li>
             @endif
 
