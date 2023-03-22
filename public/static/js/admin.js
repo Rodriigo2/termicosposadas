@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function(){
             }
         });
     }
-    if(route == "product_edit"){
+    if(route == "products_edit"){
     var btn_product_file_image = document.getElementById('btn_product_file_image');
     var product_file_image = document.getElementById('product_file_image');
     btn_product_file_image.addEventListener('click', function() {

@@ -13,6 +13,9 @@ a
 .mtop32
     margin-top 32px
 
+.pleft0
+    padding-left 0px !important
+
 .form-control
     &:hover
     &:focus
@@ -234,6 +237,7 @@ nav
     margin-top 24px
     .categories
         position relative
+        z-index: 1
         a
             background-color #020303
             border-radius 4px
@@ -393,6 +397,25 @@ nav
                 margin-right 32px
                 float right
 
+.load_more_products
+    margin-bottom 24px
+    a  
+        display block
+        border-radius 4px
+        border 1px solid #e6e6e6
+        color #e6e6e6
+        width 40%
+        position relative
+        margin-left 30%
+        padding 8px
+        text-align center
+        text-transform uppercase
+        text-decoration none
+        background-color #020303
+        &:hover
+            background-color #24a3fc
+            color #e6e6e6
+
 .products_list
     display block
     margin-top 32px
@@ -470,15 +493,50 @@ nav
             .title
                 margin-top 8px
             .title
+                display block
                 font-size 1.2em
                 color #020303
+                overflow hidden
+                text-overflow ellipsis
+                white-space nowrap
+                width 100%
             .price
                 font-size 1.4em
                 margin-top 4px
                 font-weight bold
                 color #020303
                     
+.favorite_active
+    background-color #ea4c89 !important
+    color #fff !important
 
+.product_single
+    background-color #e6e6e6
+    border-radius 4px
+    margin-top 32px
+    padding 12px
+
+.slick-next 
+    right 8px
+.slick-prev
+    left 8px
+.slick-arrow
+    align-items center
+    background-color rgba(0,0,0, .6)
+    display flex
+    border-radius  50%
+    justify-content center
+    height 36px
+    width 36px
+    z-index 90
+    &:before
+        position relative
+        left 0px
+        top 1px
+    &:hover
+    &:active
+    &:focus
+        background-color rgba(0,0,0, .75)
 
 @media only screen and (max-width: 728px)
   nav

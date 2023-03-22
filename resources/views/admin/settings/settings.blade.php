@@ -65,10 +65,17 @@
                     <label for="products_per_page">Productos a mostrar por página:</label>
                     <div class="input-group">
                         <div class="input-group-text"><i class="fa-solid fa-keyboard"></i></div>
-                    {!! Form::text('products_per_page', Config::get('termicosposadas.products_per_page'), ['class' => 'form-control']) !!}
+                    {!! Form::number('products_per_page',Config::get('termicosposadas.products_per_page'), ['class' => 'form-control', 'min' => 1, 'required']) !!}
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label for="products_per_page_random">Productos a mostrar por página(Random):</label>
+                    <div class="input-group">
+                        <div class="input-group-text"><i class="fa-solid fa-keyboard"></i></div>
+                    {!! Form::number('products_per_page_random' ,Config::get('termicosposadas.products_per_page_random'),  ['class' => 'form-control', 'min' => 1, 'required']) !!}
+                    </div>
                 </div>
                 </div>
-            </div>
             <div class="row mtop16">
                 <div class="col-md-12">
                     {!! Form::submit('Guardar', ['class' => 'btn btn-success']) !!}
