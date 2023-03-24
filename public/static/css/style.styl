@@ -237,7 +237,7 @@ nav
     margin-top 24px
     .categories
         position relative
-        z-index: 1
+        z-index: 99
         a
             background-color #020303
             border-radius 4px
@@ -272,7 +272,7 @@ nav
                         position relative
                         margin-top -5px
                         margin-right 12px
-                        width 20px
+                        width 40px
                     &:hover
                         color #fff
     .input-group
@@ -418,7 +418,7 @@ nav
 
 .products_list
     display block
-    margin-top 32px
+    margin-top 12px
     padding 0px
     overflow hidden
     width 100%
@@ -538,6 +538,10 @@ nav
     &:focus
         background-color rgba(0,0,0, .75)
 
+.home_title
+    font-size 1.8em
+    font-weight 700
+
 @media only screen and (max-width: 728px)
   nav
     .navbar-nav
@@ -587,8 +591,17 @@ nav
             box-shadow none !important
     
 
+  .home_action_bar
+        form
+            margin-top 16px
+  .mdslider
+        display none
 
-
-
-
-    
+  .products_list
+        .product
+            margin-right 2%
+            width 49%
+            &:nth-child(5n)
+                margin-right 2% !important
+            &:nth-child(even)
+                margin-right 0px !important

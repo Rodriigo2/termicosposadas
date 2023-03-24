@@ -20,26 +20,31 @@
         <div class="inside">
             {!! Form::open(['url' => '/admin/product/'.$p->id.'/edit', 'files' => true]) !!}
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-12">
                     <label for="name">Nombre de producto:</label>
                     <div class="input-group">
                         <div class="input-group-text"><i class="fa-solid fa-keyboard"></i></div>
                     {!! Form::text('name', $p->name, ['class' => 'form-control']) !!}
                 </div>
                 </div>
-                <div class="col-md-3">
-                    <label for="category">Categoría:</label>
+
+            </div>
+            <div class="row mtop16">
+                <div class="col-md-6">
+                    <label for="category">Categoría padre:</label>
                     <div class="input-group">
                         <div class="input-group-text"><i class="fa-solid fa-keyboard"></i></div>
-                        {!! Form::select('category', $cats, $p->category_id, ['class' => 'form-select']) !!}
+                        {!! Form::select('category', $cats, $p->category_id, ['class' => 'form-select', 'id' => 'category']) !!}
+
+                        {!! Form::hidden('subcategory_actual', $p->subcategory_id, ['id' => 'subcategory_actual']) !!}
                 </div>
                 </div>
 
-                <div class="col-md-4">
-                    <label for="img">Imagen destacada:</label>
-                    <div class="input-group mb-3">
-                    <label class="input-group-text" for="inputGroupFile01">Upload</label>
-                    {!! Form::file('img', ['class' => 'form-control', 'id' => 'inputGroupFile01', 'accept'=>'image/*']) !!}
+                <div class="col-md-6">
+                    <label for="subcategory">Subcategoría:</label>
+                    <div class="input-group">
+                        <div class="input-group-text"><i class="fa-solid fa-keyboard"></i></div>
+                        {!! Form::select('subcategory', [], null, ['class' => 'form-select', 'id' => 'subcategory', 'required']) !!}
                 </div>
                 </div>
 
@@ -69,14 +74,15 @@
                     </div>
 
                     <div class="col-md-3">
-                        <label for="status">Estado:</label>
-                        <div class="input-group">
-                            <div class="input-group-text"><i class="fa-solid fa-keyboard"></i></div>
-                            {!! Form::select('status', ['0' => 'Borrador', '1' => 'Público'], $p->status, ['class' => 'form-select']) !!}
+                        <label for="img">Imagen destacada:</label>
+                        <div class="input-group mb-3">
+                        <label class="input-group-text" for="inputGroupFile01">Upload</label>
+                        {!! Form::file('img', ['class' => 'form-control', 'id' => 'inputGroupFile01', 'accept'=>'image/*']) !!}
                     </div>
                     </div>
-
                 </div>
+
+                
 
             </div>
 
@@ -94,6 +100,15 @@
                     <div class="input-group">
                         <div class="input-group-text"><i class="fa-solid fa-keyboard"></i></div>
                         {!! form::text('code', $p->code, ['class' => 'form-control']) !!}
+                </div>
+                </div>
+
+                
+                <div class="col-md-3">
+                    <label for="status">Estado:</label>
+                    <div class="input-group">
+                        <div class="input-group-text"><i class="fa-solid fa-keyboard"></i></div>
+                        {!! Form::select('status', ['0' => 'Borrador', '1' => 'Público'], $p->status, ['class' => 'form-select']) !!}
                 </div>
                 </div>
             </div>

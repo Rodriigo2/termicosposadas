@@ -24,16 +24,16 @@ class ProductController extends Controller
     public function getHome($status){
         switch($status){
             case '0':
-                $products = Product::with(['cat'])->where('status', '0')->orderBy('id','Desc')->paginate(25);
+                $products = Product::with(['cat', 'getSubCategory'])->where('status', '0')->orderBy('id','Desc')->paginate(25);
                 break;
             case '1':
-                $products = Product::with(['cat'])->where('status', '1')->orderBy('id','Desc')->paginate(25);
+                $products = Product::with(['cat', 'getSubCategory'])->where('status', '1')->orderBy('id','Desc')->paginate(25);
                 break;
             case 'all':
-                $products = Product::with(['cat'])->orderBy('id','Desc')->paginate(25);
+                $products = Product::with(['cat', 'getSubCategory'])->orderBy('id','Desc')->paginate(25);
                 break;
             case 'trash':
-                $products = Product::with(['cat'])->onlyTrashed()->orderBy('id','Desc')->paginate(25);
+                $products = Product::with(['cat', 'getSubCategory'])->onlyTrashed()->orderBy('id','Desc')->paginate(25);
                 break;
 
         }
@@ -42,7 +42,7 @@ class ProductController extends Controller
     }
 
     public function getProductAdd(){
-        $cats = Category::where('module', '0') ->pluck('name', 'id');
+        $cats = Category::where('module', '0')->where('parent', '0') ->pluck('name', 'id');
         $data = ['cats' => $cats];
         return view('admin.products.add', $data);
     }
@@ -81,6 +81,7 @@ class ProductController extends Controller
             $product->name= e($request->input('name'));
             $product->slug= Str::slug($request->input('name'));
             $product->category_id=$request->input('category');
+            $product->subcategory_id=$request->input('subcategory');
             $product->file_path = date('Y-m-d');
             $product->image=$filename;
             $product->price= $request->input('price');
@@ -107,7 +108,7 @@ class ProductController extends Controller
 
     public function getProductEdit($id){
         $p = Product::findOrFail($id);
-        $cats = Category::where('module', '0') ->pluck('name', 'id');
+        $cats = Category::where('module', '0')->where('parent', '0') ->pluck('name', 'id');
         $data = ['cats' => $cats, 'p'=> $p];
         return view('admin.products.edit', $data);
     }
@@ -136,6 +137,7 @@ class ProductController extends Controller
             $product->code = e($request->input('code'));
             $product->name= e($request->input('name'));
             $product->category_id=$request->input('category');
+            $product->subcategory_id=$request->input('subcategory');
             if($request->hasFile('img')):
             $path = '/'.date('Y-m-d');
             $fileExt = trim($request->file('img')->getClientOriginalExtension());

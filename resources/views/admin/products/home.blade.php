@@ -85,7 +85,7 @@
                             </td>
                             <td>{{ $p->name }} @if($p->status=="0") <i class="fa-solid fa-eraser" data-toggle="tooltip" data-placement="top" title="Estado: Borrador"></i> @endif</td>
                             <td>
-                            {{ $p->cat->name ?? 'Ninguna' }}
+                            {{ $p->cat->name ?? 'Ninguna' }} <i class="fa-solid fa-angles-right"></i> {{$p->getSubCategory->name}}
                             </td>
                             <td>{{ $p->price }}</td>
                             <td><div class="opts">

@@ -6,7 +6,14 @@
 <li class="breadcrumb-item">
     <a href="{{url('/admin/categories/0')}}"><i class="fa-regular fa-folder-closed"></i>Categorías</a>
 </li>
-
+@if($cat->parent!="0")
+<li class="breadcrumb-item">
+    <a href="{{url('/admin/category/'.$cat->parent.'/subs')}}"><i class="fa-regular fa-folder-closed"></i> {{ $cat->getParent->name }}</a>
+</li>
+@endif
+<li class="breadcrumb-item">
+    <a href="{{url('/admin/category/'.$cat->id.'/edit')}}"><i class="fa-regular fa-folder-closed"></i> Editando {{ $cat->name }}</a>
+</li>
 @endsection
 
 
@@ -27,17 +34,18 @@
                     {!! Form::text('name', $cat->name, ['class' => 'form-control']) !!}
                 </div>
 
-                <label for="module" class="mtop16">Módulo:</label>
-                <div class="input-group">
-                    <div class="input-group-text"><i class="fa-solid fa-keyboard"></i></div>
-                    {!! Form::select('module', getModulesArray(), $cat->module, ['class' => 'form-select']) !!}
-            </div>
 
             <label for="icon" class="mtop16">Ícono:</label>
             <div class="input-group mb-3">
                 <label class="input-group-text" for="inputGroupFile01">Upload</label>
             {!! Form::file('icon', ['class' => 'form-control' ,'id' => 'inputGroupFile01', 'accept'=>'image/*']) !!}
             </div>
+
+            <label for="order">Orden:</label>
+                    <div class="input-group">
+                        <div class="input-group-text"><i class="fa-solid fa-keyboard"></i></div>
+                    {!! Form::number('order', $cat->order, ['class' => 'form-control']) !!}
+                </div>
 
                 {!! Form::submit('Guardar',['class' => 'btn btn-success mtop16']) !!}
                     {!! Form::close() !!}

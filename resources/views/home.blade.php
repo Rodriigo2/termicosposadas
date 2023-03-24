@@ -38,6 +38,7 @@
 </section>
 
 <section>
+    <h2 class="home_title mtop32">Productos destacados</h2>
       <div class="products_list" id="products_list"></div>
         {{-- <div class="load_more_products">
             <a href="#" id="load_more_products">Cargar mas productos</a>

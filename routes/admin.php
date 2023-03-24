@@ -32,8 +32,9 @@ Route::prefix('/admin')->group(function(){
 
     //Categories
     Route::get('/categories/{module}', 'App\Http\Controllers\Admin\CategoriesController@getHome')->name('categories');
-    Route::post('/category/add', 'App\Http\Controllers\Admin\CategoriesController@postCategoryAdd')->name('category_add');
+    Route::post('/category/add/{module}', 'App\Http\Controllers\Admin\CategoriesController@postCategoryAdd')->name('category_add');
     Route::get('/category/{id}/edit', 'App\Http\Controllers\Admin\CategoriesController@getCategoryEdit')->name('category_edit');
+    Route::get('/category/{id}/subs', 'App\Http\Controllers\Admin\CategoriesController@getSubCategories')->name('category_edit');
     Route::post('/category/{id}/edit', 'App\Http\Controllers\Admin\CategoriesController@postCategoryEdit')->name('category_edit');
     Route::get('/category/{id}/delete', 'App\Http\Controllers\Admin\CategoriesController@getCategoryDelete')->name('category_delete');
 
@@ -44,5 +45,8 @@ Route::prefix('/admin')->group(function(){
     Route::get('/slider/{id}/edit', 'App\Http\Controllers\Admin\SlidersController@getEditSlider')->name('sliders_edit');
     Route::post('/slider/{id}/edit', 'App\Http\Controllers\Admin\SlidersController@postEditSlider')->name('sliders_edit');
     Route::get('/slider/{id}/delete', 'App\Http\Controllers\Admin\SlidersController@getDeleteSlider')->name('sliders_delete');
+
+    // Javascript Request
+    Route::get('/md/api/load/subcategories/{parent}', ['uses' => 'App\Http\Controllers\Admin\ApiController@getSubCategories']);
 });
 ?>

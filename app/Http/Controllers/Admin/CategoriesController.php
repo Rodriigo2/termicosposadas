@@ -20,12 +20,12 @@ class CategoriesController extends Controller
     }
 
     public function getHome($module){
-        $cats = Category::where('module', $module)->orderBy('name', 'Asc')->get();
-        $data = ['cats' => $cats];
+        $cats = Category::where('module', $module)->where('parent', '0')->orderBy('order', 'Asc')->get();
+        $data = ['cats' => $cats, 'module' => $module];
         return view('admin.categories.home', $data);
     }
 
-    public function postCategoryAdd( Request $request){
+    public function postCategoryAdd( Request $request, $module){
         $rules = [
             'name' => 'required',
             'icon' => 'required',
@@ -48,7 +48,8 @@ class CategoriesController extends Controller
             $filename= rand(1,999). '-'.$name.'.'.$fileExt;
 
             $c = new Category;
-            $c ->module = $request->input('module');
+            $c ->module = $module;
+            $c ->parent = $request->input('parent');
             $c->name = e($request->input('name'));
             $c->slug = Str::slug($request->input('name'));
             $c->file_path = date('Y-m-d');
@@ -84,7 +85,6 @@ class CategoriesController extends Controller
             return back()->withErrors($validator)->with('message','Se ha producido un error')->with('typealert','danger');
         else:
             $c =  Category::findOrFail($id);
-            $c ->module = $request->input('module');
             $c->name = e($request->input('name'));
             $c->slug = Str::slug($request->input('name'));
             if($request->hasFile('icon')):
@@ -102,11 +102,18 @@ class CategoriesController extends Controller
                 unlink($upload_path.'/'.$actual_file_path.'/'.$actual_icon);
                 endif;
             endif;
+            $c->order = $request->input('order');
             if($c->save()):
                 return back()->with('message','Guardado con éxito.')->with('typealert','success');
             endif;
         endif;
 
+    }
+
+    public function getSubCategories($id){
+        $cat = Category::findOrFail($id);
+        $data = ['category' => $cat];
+        return view('admin.categories.subs_categories', $data);
     }
 
     public function getCategoryDelete($id){

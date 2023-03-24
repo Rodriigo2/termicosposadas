@@ -20,30 +20,34 @@
         <div class="inside">
             {!! Form::open(['url' => '/admin/product/add', 'files' => true]) !!}
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-12">
                     <label for="name">Nombre de producto:</label>
                     <div class="input-group">
                         <div class="input-group-text"><i class="fa-solid fa-keyboard"></i></div>
                     {!! Form::text('name', null, ['class' => 'form-control']) !!}
                 </div>
                 </div>
-                <div class="col-md-3">
+
+            </div>
+            <div class="row mtop16">
+                <div class="col-md-6">
                     <label for="category">Categoría:</label>
                     <div class="input-group">
                         <div class="input-group-text"><i class="fa-solid fa-keyboard"></i></div>
-                        {!! Form::select('category', $cats, 0, ['class' => 'form-select']) !!}
+                        {!! Form::select('category', $cats, 0, ['class' => 'form-select', 'id' => 'category']) !!}
+                        {!! Form::hidden('subcategory_actual', 0, ['id' => 'subcategory_actual']) !!}
                 </div>
                 </div>
 
-                <div class="col-md-4">
-                    <label for="img">Imagen destacada:</label>
-                    <div class="input-group mb-3">
-                    <label class="input-group-text" for="inputGroupFile01">Upload</label>
-                    {!! Form::file('img', ['class' => 'form-control', 'id' => 'inputGroupFile01', 'accept'=>'image/*']) !!}
+                <div class="col-md-6">
+                    <label for="subcategory">Subcategoría:</label>
+                    <div class="input-group">
+                        <div class="input-group-text"><i class="fa-solid fa-keyboard"></i></div>
+                        {!! Form::select('subcategory', [], null, ['class' => 'form-select', 'id' => 'subcategory', 'required']) !!}
                 </div>
                 </div>
 
-                <div class="row ">
+                <div class="row mtop16">
                     <div class="col-md-3">
                         <label for="price">Precio:</label>
                         <div class="input-group">
@@ -67,6 +71,18 @@
                             {!! form::number('discount', 0.00, ['class' => 'form-control', 'min'=>'0.00', 'step' => 'any']) !!}
                         </div>
                 </div>
+                <div class="col-md-3">
+                    <label for="img">Imagen destacada:</label>
+                    <div class="input-group mb-3">
+                    <label class="input-group-text" for="inputGroupFile01">Upload</label>
+                    {!! Form::file('img', ['class' => 'form-control', 'id' => 'inputGroupFile01', 'accept'=>'image/*']) !!}
+                </div>
+                </div>
+
+
+            </div>
+
+            <div class="row mtop16">
 
                 <div class="col-md-3">
                     <label for="status">Estado:</label>
@@ -76,9 +92,6 @@
                 </div>
                 </div>
 
-            </div>
-
-            <div class="row mtop16">
                 <div class="col-md-3">
                     <label for="inventory">Inventario:</label>
                     <div class="input-group">
