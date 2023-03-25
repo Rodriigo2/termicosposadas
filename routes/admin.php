@@ -23,6 +23,7 @@ Route::prefix('/admin')->group(function(){
     Route::get('/product/{id}/edit','App\Http\Controllers\Admin\ProductController@getProductEdit')->name('products_edit');
     Route::get('/product/{id}/delete','App\Http\Controllers\Admin\ProductController@getProductDelete')->name('products_delete');
     Route::get('/product/{id}/restore','App\Http\Controllers\Admin\ProductController@getProductRestore')->name('products_restore');
+    Route::get('/product/{id}/inventory','App\Http\Controllers\Admin\ProductController@getProductInventory')->name('products_inventory');
     Route::post('/product/add','App\Http\Controllers\Admin\ProductController@postProductAdd')->name('products_add');
     Route::post('/product/search','App\Http\Controllers\Admin\ProductController@postProductSearch')->name('products_search');
     Route::post('/product/{id}/edit','App\Http\Controllers\Admin\ProductController@postProductEdit')->name('products_edit');

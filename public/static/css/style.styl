@@ -7,8 +7,39 @@ a
         box-shadow none
         outline none
 
+.loader
+    background-color rgba(255,255,255, .9)
+    align-items center
+    display flex
+    justify-content center
+    height 100vh
+    left 0px
+    position fixed
+    top 0px
+    width 100%
+    z-index 1000
+    .box
+        display block
+        width 160px
+        .cart
+            overflow hidden
+            width 100%
+            img
+                animation loading_image 2s linear infinite
+                margin-left -100%
+                display block
+                position relative
+                width 120px
+        .load
+            margin-left calc(50% - 30px)
+            height 60px
+            width 60px
+
 .mtop16
     margin-top 16px
+
+.mtop24
+    margin-top 24px
 
 .mtop32
     margin-top 32px
@@ -24,7 +55,7 @@ a
 body
     background-color #fff
     font-size 14px
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Montserrat', sans-serif;
 
 nav
     background-color color1
@@ -515,6 +546,81 @@ nav
     border-radius 4px
     margin-top 32px
     padding 12px
+    .btn-success
+        background-color #00c841
+        border 0px
+        color #fff
+        width 100%
+        &:hover
+            background-color #00966b
+    .price
+        font-size 2.3em
+        font-weight 700
+    h2.title
+        font-size 2em
+        font-weight 500
+        margin-bottom 6px
+    h5.title
+        font-size 1em
+    .category
+        margin-bottom 8px
+        ul
+            list-style none
+            padding 0px
+            overflow hidden
+            margin 0px
+            li
+                display inline-flex
+                margin 0px 6px
+                float left
+                .next
+                    display block
+                    color #666
+                    font-size .6em
+                    position relative
+                    margin-top 5px
+                a
+                    color #333
+                    display inline-block
+                    font-size .9em !important
+                    text-decoration none
+                    img
+                        display block
+                        height 13px
+                        width 13px
+                    i
+                        color #020303
+                    &:hover
+                        text-decoration underline
+                &:first-child
+                    margin-left 0px
+    .inside
+        padding 12px
+    .content
+    .before_quantity
+        border-top 1px solid #8C8888
+        margin-top 24px
+        padding-top 24px
+    .quantity
+        overflow hidden
+        .amount_action
+            background-color  #24a3fc
+            align-items center
+            border-radius 50%
+            display flex
+            color #fff
+            justify-content center
+            float left
+            height 32px
+            text-decoration none
+            width 32px
+            &:first-child
+                margin-right 8px
+            &:last-child
+                margin-left 8px
+        .form-control
+            float left
+            width calc(100% - 80px)
 
 .slick-next 
     right 8px
@@ -541,6 +647,8 @@ nav
 .home_title
     font-size 1.8em
     font-weight 700
+
+
 
 @media only screen and (max-width: 728px)
   nav
@@ -605,3 +713,25 @@ nav
                 margin-right 2% !important
             &:nth-child(even)
                 margin-right 0px !important
+    
+   .product_single
+        .pleft0
+            padding-left 12px !important
+        h2.title
+            margin-bottom 8px
+        .category
+            background-color #f8f8f8
+            padding 8px
+        .inside
+            padding 2px
+
+
+@keyframes loading_image {
+    0%{
+        margin-left: -100px;
+        }
+    100%{
+        margin-left: 100%;
+        
+        }    
+}

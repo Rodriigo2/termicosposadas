@@ -63,7 +63,7 @@
                 </div>
                             {!! Form::close() !!}
             </div>
-            <table class="table table-striped">
+            <table class="table">
                 <thead>
                     <tr>
                         <td>ID</td>
@@ -78,9 +78,9 @@
                     @foreach ($products as $p)
                         <tr>
                             <td width="50px">{{ $p->id }}</td>
-                            <td width="64px">
+                            <td width="48px">
                                 <a data-fancybox="gallery" href="{{url('/uploads/'.$p->file_path.'/'.$p->image)}}" >
-                                    <img src="{{url('/uploads/'.$p->file_path.'/t_'.$p->image)}}" width="64px">
+                                    <img src="{{url('/uploads/'.$p->file_path.'/t_'.$p->image)}}" width="48px">
                                 </a>
                             </td>
                             <td>{{ $p->name }} @if($p->status=="0") <i class="fa-solid fa-eraser" data-toggle="tooltip" data-placement="top" title="Estado: Borrador"></i> @endif</td>
@@ -88,17 +88,20 @@
                             {{ $p->cat->name ?? 'Ninguna' }} <i class="fa-solid fa-angles-right"></i> {{$p->getSubCategory->name}}
                             </td>
                             <td>{{ $p->price }}</td>
-                            <td><div class="opts">
+                            <td width="160"><div class="opts">
                                 @if(kvfj(Auth::user()->permissions, 'products_edit'))
-                                <a href="{{ url('/admin/product/'.$p->id.'/edit') }}" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fa-solid fa-user-pen"></i></a>
+                                <a href="{{ url('/admin/product/'.$p->id.'/edit') }}" data-toggle="tooltip" data-placement="top" title="Editar" class="edit"><i class="fa-solid fa-user-pen"></i></a>
+                                @endif
+                                @if(kvfj(Auth::user()->permissions, 'products_inventory'))
+                                <a href="{{url('/admin/product/'.$p->id.'/inventory')}}" data-toggle="tooltip" data-placement="top" title="Inventario" class="inventory"><i class="fa-solid fa-box"></i></a>
                                 @endif
                                 @if(kvfj(Auth::user()->permissions, 'products_delete'))
                                 @if(is_null($p->deleted_at))
-                                <a href="" data-action="delete" data-path="admin/product" data-object="{{ $p->id }}" data-toggle="tooltip" data-placement="top" title="Eliminar" class="btn-deleted"><i class="fa-solid fa-trash"></i>
+                                <a href="" data-action="delete" data-path="admin/product" data-object="{{ $p->id }}" data-toggle="tooltip" data-placement="top" title="Eliminar" class="btn-deleted delete"><i class="fa-solid fa-trash"></i>
                                 </a>
                                 @else
                                 @if(kvfj(Auth::user()->permissions, 'products_restore'))
-                                <a href="{{url('/admin/product/'.$p->id.'/restore')}}" data-action="restore" data-path="admin/product" data-object="{{ $p->id }}" data-toggle="tooltip" data-placement="top" title="Restaurar" class="btn-deleted"><i class="fa-solid fa-trash-can-arrow-up"></i>
+                                <a href="{{url('/admin/product/'.$p->id.'/restore')}}" data-action="restore" data-path="admin/product" data-object="{{ $p->id }}" data-toggle="tooltip" data-placement="top" title="Restaurar" class="btn-deleted restore"><i class="fa-solid fa-trash-can-arrow-up"></i>
                                 </a>
                                 @endif
                                 @endif

@@ -13,9 +13,14 @@ $(document).ready(function(){
         dots:true, infinite:true, autoplay:true, autoplaySpeed: 2000});
 });
 
+window.onload = function(){
+    loader.style.display = "none";
+}
+
 document.addEventListener('DOMContentLoaded', function(){
     const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
     const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+    var loader = document.getElementById('loader');
     var slider = new MDSlider;
     var btn_avatar_edit = document.getElementById('btn_avatar_edit');
     var form_avatar_change = document.getElementById('form_avatar_change');

@@ -74,7 +74,8 @@ function user_permissions(){
                 'products_delete' => 'Puede eliminar productos.',
                 'products_restore' => 'Puede restaurar productos.',
                 'product_gallery_add' => 'Puede agregar imágenes a la galería.',
-                'product_gallery_delete' => 'Puede eliminar imágenes a la galería.'
+                'product_gallery_delete' => 'Puede eliminar imágenes a la galería.',
+                'products_inventory' => 'Puede administrar el inventario de un producto.'
             ]
             ],
             'categories' => [

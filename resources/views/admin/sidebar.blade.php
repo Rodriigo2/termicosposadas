@@ -26,7 +26,7 @@
             @endif
             @if(kvfj(Auth::user()->permissions, 'products'))
             <li>
-                <a href="{{ url('/admin/products/1') }}" class="lk-products lk-product_add lk-product_edit lk-products_delete lk_products_restorelk-product_gallery_add lk-products_search"><i class="fa-solid fa-boxes-stacked"></i> Productos</a>
+                <a href="{{ url('/admin/products/1') }}" class="lk-products lk-product_add lk-product_edit lk-products_delete lk_products_restorelk-product_gallery_add lk-products_search lk-products_inventory"><i class="fa-solid fa-boxes-stacked"></i> Productos</a>
             </li>
             @endif
             @if(kvfj(Auth::user()->permissions, 'orders_list'))

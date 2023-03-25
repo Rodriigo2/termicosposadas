@@ -267,4 +267,10 @@ class ProductController extends Controller
         endif;
     }
 
+
+    public function getProductInventory($id){
+        $product = Product::findOrFail($id);
+        $data = ['product' => $product];
+        return view('admin.products.inventory', $data);
+    }
 }
