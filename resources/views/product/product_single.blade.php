@@ -2,6 +2,10 @@
 
 @section('title', $product->name)
 
+@section('custom_meta')
+<meta name="product_id" content="{{ $product->id }}">
+@stop
+
 @section('content')
 
 <div class="product_single shadow-lg">
@@ -47,9 +51,21 @@
 
                 <div class="add_cart">
                     {!! Form::open(['url' => '/cart/add']) !!}
+                    {!! Form::hidden('inventory', null, ['id' => 'field_inventory']) !!}
+                    {!! Form::hidden('variant', null, ['id' => 'field_variant']) !!}
                     <div class="row">
                         <div class="col-md-12">
-                            <span class="price">{{Config::get('termicosposadas.currency').number_format($product->price, 2, '.', ',')}}</span>
+                            <div class="variants">
+                                <ul id="inventory">
+                                    @foreach ($product->getInventory as $inventory)
+                                        <li><a href="#" class="inventory" data-inventory-id="{{ $inventory->id }}">{{ $inventory->name }} - <span class="price">{{Config::get('termicosposadas.currency').number_format($inventory->price, 2, '.', ',')}}</span></a></li>
+                                    @endforeach
+                                </ul>
+                            </div>
+
+                            <div class="variants hidden btop1 ptop16 mtop16" id="variants_div">
+                                <ul id="variants"></ul>
+                            </div>
                         </div>
                     </div>
                     <div class="before_quantity">

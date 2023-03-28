@@ -4,7 +4,7 @@
 
 @section('breadcrumb')
 <li class="breadcrumb-item">
-    <a href="{{url('/admin/products')}}"><i class="fa-solid fa-boxes-stacked"></i>Productos</a>
+    <a href="{{url('/admin/products/1')}}"><i class="fa-solid fa-boxes-stacked"></i>Productos</a>
 </li>
 @endsection
 
@@ -48,15 +48,7 @@
                 </div>
                 </div>
 
-                <div class="row ">
-                    <div class="col-md-3">
-                        <label for="price">Precio:</label>
-                        <div class="input-group">
-                            <div class="input-group-text"><i class="fa-solid fa-keyboard"></i></div>
-                            {!! form::number('price', $p->price, ['class' => 'form-control', 'min'=>'0.00', 'step' => 'any']) !!}
-                    </div>
-                    </div>
-
+                <div class="row mtop16">
                     <div class="col-md-3">
                         <label for="indiscount">¿En descuento?:</label>
                         <div class="input-group">
@@ -74,6 +66,14 @@
                     </div>
 
                     <div class="col-md-3">
+                        <label for="code">Código de sistema:</label>
+                        <div class="input-group">
+                            <div class="input-group-text"><i class="fa-solid fa-keyboard"></i></div>
+                            {!! form::text('code', $p->code, ['class' => 'form-control']) !!}
+                    </div>
+                    </div>
+
+                    <div class="col-md-3">
                         <label for="img">Imagen destacada:</label>
                         <div class="input-group mb-3">
                         <label class="input-group-text" for="inputGroupFile01">Upload</label>
@@ -86,24 +86,7 @@
 
             </div>
 
-            <div class="row mtop16">
-                <div class="col-md-3">
-                    <label for="inventory">Inventario:</label>
-                    <div class="input-group">
-                        <div class="input-group-text"><i class="fa-solid fa-keyboard"></i></div>
-                        {!! form::number('inventory', $p->inventory, ['class' => 'form-control', 'min'=>'0.00']) !!}
-                </div>
-                </div>
-
-                <div class="col-md-3">
-                    <label for="code">Código de sistema:</label>
-                    <div class="input-group">
-                        <div class="input-group-text"><i class="fa-solid fa-keyboard"></i></div>
-                        {!! form::text('code', $p->code, ['class' => 'form-control']) !!}
-                </div>
-                </div>
-
-                
+            <div class="row">
                 <div class="col-md-3">
                     <label for="status">Estado:</label>
                     <div class="input-group">

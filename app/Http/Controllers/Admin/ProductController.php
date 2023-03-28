@@ -10,6 +10,8 @@ use Validator, Str, Config, Image;
 use App\Http\Models\Category;
 use App\Http\Models\PGallery;
 use App\Http\Models\Product;
+use App\Http\Models\Inventory;
+use App\Http\Models\Variant;
 
 class ProductController extends Controller
 {
@@ -24,16 +26,16 @@ class ProductController extends Controller
     public function getHome($status){
         switch($status){
             case '0':
-                $products = Product::with(['cat', 'getSubCategory'])->where('status', '0')->orderBy('id','Desc')->paginate(25);
+                $products = Product::with(['cat', 'getSubCategory', 'getPrice'])->where('status', '0')->orderBy('id','Desc')->paginate(25);
                 break;
             case '1':
-                $products = Product::with(['cat', 'getSubCategory'])->where('status', '1')->orderBy('id','Desc')->paginate(25);
+                $products = Product::with(['cat', 'getSubCategory', 'getPrice'])->where('status', '1')->orderBy('id','Desc')->paginate(25);
                 break;
             case 'all':
-                $products = Product::with(['cat', 'getSubCategory'])->orderBy('id','Desc')->paginate(25);
+                $products = Product::with(['cat', 'getSubCategory', 'getPrice'])->orderBy('id','Desc')->paginate(25);
                 break;
             case 'trash':
-                $products = Product::with(['cat', 'getSubCategory'])->onlyTrashed()->orderBy('id','Desc')->paginate(25);
+                $products = Product::with(['cat', 'getSubCategory', 'getPrice'])->onlyTrashed()->orderBy('id','Desc')->paginate(25);
                 break;
 
         }
@@ -51,7 +53,6 @@ class ProductController extends Controller
         $rules = [
             'name' => 'required',
             'img' => 'required',
-            'price' => 'required',
             'content' => 'required',
         ];
 
@@ -59,7 +60,6 @@ class ProductController extends Controller
             'name.required' => 'El nombre del producto es requerido',
             'img.required' => 'Seleccione una imagen destacada',
             'img.image' => 'El archivo no es una imagen',
-            'price.required' => 'Ingrese el precio del producto',
             'content.required' => 'Ingrese una descripción del producto'
         ];
 
@@ -84,8 +84,6 @@ class ProductController extends Controller
             $product->subcategory_id=$request->input('subcategory');
             $product->file_path = date('Y-m-d');
             $product->image=$filename;
-            $product->price= $request->input('price');
-            $product->inventory = e($request->input('inventory'));
             $product->in_discount= $request->input('indiscount');
             $product->discount= $request->input('discount');
             $product->status = $request->input('status');
@@ -115,14 +113,12 @@ class ProductController extends Controller
     public function postProductEdit($id, Request $request){
         $rules = [
             'name' => 'required',
-            'price' => 'required',
             'content' => 'required',
         ];
 
         $messages = [
             'name.required' => 'El nombre del producto es requerido',
             'img.image' => 'El archivo no es una imagen',
-            'price.required' => 'Ingrese el precio del producto',
             'content.required' => 'Ingrese una descripción del producto'
         ];
 
@@ -148,12 +144,11 @@ class ProductController extends Controller
             $product->file_path = date('Y-m-d');
             $product->image=$filename;
             endif;
-            $product->price= $request->input('price');
-            $product->inventory = e($request->input('inventory'));
             $product->in_discount= $request->input('indiscount');
             $product->discount= $request->input('discount');
             $product->content= e($request->input('content'));
             if($product->save()):
+                $this->getUpdateMinPrice($product->id);
                 if($request->hasFile('img')):
                     $fl = $request->img->storeAs($path,$filename,'uploads');
                     $img = Image::make($file_file);
@@ -272,5 +267,116 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
         $data = ['product' => $product];
         return view('admin.products.inventory', $data);
+    }
+
+    public function postProductInventory(Request $request, $id){
+        $rules = [
+            'name' => 'required',
+            'price' => 'required'
+        ];
+
+        $messages = [
+            'name.required' => 'El nombre del inventario es requerido',
+            'price.required' => 'Ingrese el precio del inventario',
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+        if($validator->fails()):
+            return back()->withErrors($validator)->with('message','Se ha producido un error')->with('typealert','danger')->withInput();
+        else:
+            $inventory = new Inventory;
+            $inventory->product_id = $id;
+            $inventory->name = e($request->input('name'));
+            $inventory->quantity = $request->input('inventory');
+            $inventory->price = $request->input('price');
+            $inventory->limited = $request->input('limited');
+            $inventory->minimum = $request->input('minimum');
+            if($inventory->save()):
+                $this->getUpdateMinPrice($inventory->product_id);
+                return back()->with('message','Guardado con éxito.')->with('typealert','success');
+            endif;
+        endif;
+    }
+
+    public function getProductInventoryEdit($id){
+        $inventory = Inventory::findOrFail($id);
+        $data = ['inventory' => $inventory];
+        return view('admin.products.inventory_edit', $data);
+    }
+
+    public function postProductInventoryEdit($id, Request $request){
+        $rules = [
+            'name' => 'required',
+            'price' => 'required'
+        ];
+
+        $messages = [
+            'name.required' => 'El nombre del inventario es requerido',
+            'price.required' => 'Ingrese el precio del inventario',
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+        if($validator->fails()):
+            return back()->withErrors($validator)->with('message','Se ha producido un error')->with('typealert','danger')->withInput();
+        else:
+            $inventory =  Inventory::find($id);
+            $inventory->name = e($request->input('name'));
+            $inventory->quantity = $request->input('inventory');
+            $inventory->price = $request->input('price');
+            $inventory->limited = $request->input('limited');
+            $inventory->minimum = $request->input('minimum');
+            if($inventory->save()):
+                $this->getUpdateMinPrice($inventory->product_id);
+                return back()->with('message','Guardado con éxito.')->with('typealert','success');
+            endif;
+        endif;
+    }
+
+    public function getProductInventoryDelete($id){
+        $inventory = Inventory::findOrFail($id);
+        if($inventory->delete()):
+            $this->getUpdateMinPrice($inventory->product_id);
+            return back()->with('message','Inventario eliminado.')->with('typealert','success');
+        endif;
+    }
+
+    public function postProductInventoryVariantAdd($id, Request $request){
+        $rules = [
+            'name' => 'required',
+        ];
+
+        $messages = [
+            'name.required' => 'El nombre de la variante es requerido'
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+        if($validator->fails()):
+            return back()->withErrors($validator)->with('message','Se ha producido un error')->with('typealert','danger')->withInput();
+        else:
+            $inventory = Inventory::findOrFail($id);
+
+            $variant = new Variant;
+            $variant->product_id= $inventory->product_id;
+            $variant->inventory_id= $id;
+            $variant->name = e($request->input('name'));
+            if($variant->save()):
+                return back()->with('message','Guardado con éxito.')->with('typealert','success');
+            endif;
+        endif;
+    }
+
+    public function getProductInventoryVariantDelete($id){
+        $variant = Variant::findOrFail($id);
+        if($variant->delete()):
+            return back()->with('message','Variante eliminada.')->with('typealert','success');
+        endif;
+    }
+
+    public function getUpdateMinPrice($id){
+        $product = Product::find($id);
+        $price = $product->getPrice->min('price');
+
+        $product->price = $price;
+        $product->save();
     }
 }

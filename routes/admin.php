@@ -27,9 +27,17 @@ Route::prefix('/admin')->group(function(){
     Route::post('/product/add','App\Http\Controllers\Admin\ProductController@postProductAdd')->name('products_add');
     Route::post('/product/search','App\Http\Controllers\Admin\ProductController@postProductSearch')->name('products_search');
     Route::post('/product/{id}/edit','App\Http\Controllers\Admin\ProductController@postProductEdit')->name('products_edit');
+    Route::post('/product/{id}/inventory','App\Http\Controllers\Admin\ProductController@postProductInventory')->name('products_inventory');
     Route::post('/product/{id}/gallery/add','App\Http\Controllers\Admin\ProductController@postProductGalleryAdd')->name('product_gallery_add');
     Route::get('/product/{id}/gallery/{gid}/delete','App\Http\Controllers\Admin\ProductController@getProductGalleryDelete')->name('product_gallery_delete');
 
+
+    //Module Inventory
+    Route::get('/product/inventory/{id}/edit', 'App\Http\Controllers\Admin\ProductController@getProductInventoryEdit')->name('products_inventory');
+    Route::post('/product/inventory/{id}/edit', 'App\Http\Controllers\Admin\ProductController@postProductInventoryEdit')->name('products_inventory');
+    Route::post('/product/inventory/{id}/variant', 'App\Http\Controllers\Admin\ProductController@postProductInventoryVariantAdd')->name('products_inventory');
+    Route::get('/product/inventory/{id}/delete', 'App\Http\Controllers\Admin\ProductController@getProductInventoryDelete')->name('products_inventory');
+    Route::get('/product/variant/{id}/delete', 'App\Http\Controllers\Admin\ProductController@getProductInventoryVariantDelete')->name('products_inventory');
 
     //Categories
     Route::get('/categories/{module}', 'App\Http\Controllers\Admin\CategoriesController@getHome')->name('categories');

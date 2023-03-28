@@ -66,11 +66,10 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <td>ID</td>
+                        <td><strong>ID</strong></td>
                         <td></td>
-                        <td>Nombre</td>
-                        <td>Categoría</td>
-                        <td>Precio</td>
+                        <td><strong>Nombre</strong></td>
+                        <td><strong>Precio desde</strong></td>
                         <td></td>
                     </tr>
                 </thead>
@@ -83,11 +82,14 @@
                                     <img src="{{url('/uploads/'.$p->file_path.'/t_'.$p->image)}}" width="48px">
                                 </a>
                             </td>
-                            <td>{{ $p->name }} @if($p->status=="0") <i class="fa-solid fa-eraser" data-toggle="tooltip" data-placement="top" title="Estado: Borrador"></i> @endif</td>
                             <td>
-                            {{ $p->cat->name ?? 'Ninguna' }} <i class="fa-solid fa-angles-right"></i> {{$p->getSubCategory->name}}
+                                <p style="margin-bottom: 0px;">{{ $p->name }} @if($p->status=="0") <i class="fa-solid fa-eraser" data-toggle="tooltip" data-placement="top" title="Estado: Borrador"></i> @endif</p>
+                                <p><small><i class="fa-regular fa-folder-closed"></i> {{ $p->cat->name ?? 'Ninguna' }} <i class="fa-solid fa-angles-right"></i> {{$p->getSubCategory->name}}</small></p>
                             </td>
-                            <td>{{ $p->price }}</td>
+                            <td>
+                                {{ config('termicosposadas.currency') }} {{ $p->price }}
+                                
+                            </td>
                             <td width="160"><div class="opts">
                                 @if(kvfj(Auth::user()->permissions, 'products_edit'))
                                 <a href="{{ url('/admin/product/'.$p->id.'/edit') }}" data-toggle="tooltip" data-placement="top" title="Editar" class="edit"><i class="fa-solid fa-user-pen"></i></a>

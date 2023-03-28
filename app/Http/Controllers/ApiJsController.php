@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Config, Auth;
-use App\Http\Models\Product, App\Http\Models\Favorite;
+use App\Http\Models\Product, App\Http\Models\Favorite, App\Http\Models\Inventory;
 
 class ApiJsController extends Controller
 {
@@ -57,6 +57,11 @@ class ApiJsController extends Controller
 
                 return response()->json($data);
 
+    }
+
+    public function postProductInventoryVariants($id){
+        $query = Inventory::find($id);
+        return response()->json($query->getVariants);
     }
 
 }

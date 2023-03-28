@@ -54,6 +54,15 @@ document.addEventListener('DOMContentLoaded', function(){
         if(route == "home"){
             load_products('home');
         }
+
+        if(route == "product_single"){
+            var inventory = document.getElementsByClassName('inventory');
+            for (i = 0; i < inventory.length; i++) {
+                inventory[i].addEventListener('click', load_product_variants);
+    }
+
+            // load_product_variants();
+        }
     }
 );
 
@@ -158,3 +167,45 @@ function aviso_login(icon,title,text) {
        });
 
     }
+
+function load_product_variants(){
+    document.getElementById('variants_div').style.display="none";
+    document.getElementById('variants').innerHTML="";
+    document.getElementById('field_variant').value = null;
+    loader.style.display = "flex";
+    var inventory_list = document.getElementsByClassName('inventory');
+    for (i = 0; i < inventory_list.length; i++) {
+        inventory_list[i].classList.remove('active');
+    }
+   var product_id = document.getElementsByName('product_id')[0].getAttribute('content');
+   var inv = this.getAttribute('data-inventory-id');
+   document.getElementById('field_inventory').value = inv;
+   this.classList.add('active');
+
+   var url = base + '/md/api/load/product/inventory/'+inv+'/variants';
+    //var params = 'module=1&objects='+objects;
+    http.open('POST', url, true);
+    http.setRequestHeader('X-CSRF-Token', csrfToken);
+    //http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    http.send();
+    http.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            loader.style.display = "none";
+            var data = this.responseText;
+            data = JSON.parse(data);
+            if(data.length > 0){
+                document.getElementById('variants_div').style.display="block";
+                data.forEach(function(element, index){
+                    variant = '';
+                    variant += '<li>';
+                    variant += '<a href="#" onclick="document.getElementById(\'field_variant\').value = '+element.id+'; this.classList.add(\'active\'); return false;">';
+                    variant += element.name;
+                    variant += '</a>';
+                    variant += '</li>';
+                    document.getElementById('variants').innerHTML += variant;
+                });
+            }
+            console.log(data.length)
+        }
+    }
+}
