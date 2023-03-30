@@ -55,6 +55,10 @@ document.addEventListener('DOMContentLoaded', function(){
             load_products('home');
         }
 
+        if(route == "store"){
+            load_products('store');
+        }
+
         if(route == "product_single"){
             var inventory = document.getElementsByClassName('inventory');
             for (i = 0; i < inventory.length; i++) {
@@ -67,6 +71,7 @@ document.addEventListener('DOMContentLoaded', function(){
 );
 
 function load_products(section){
+    loader.style.display = "flex";
     page_section = section; 
     var url = base + '/md/api/load/products/'+page_section+'?page='+page;
     http.open('GET', url, true);
@@ -74,6 +79,7 @@ function load_products(section){
     http.send();
     http.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
+            loader.style.display = "none";
             page = page + 1;
             var data = this.responseText;
             data = JSON.parse(data);

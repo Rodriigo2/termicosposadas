@@ -18,7 +18,9 @@ class ApiJsController extends Controller
             case 'home':
                 $products = Product::where('status', 1)->inRandomOrder()->paginate($items_x_page_random);
                 break;
-            
+            case 'store':
+                    $products = Product::where('status', 1)->orderBy('id', 'Desc')->paginate($items_x_page);
+                    break;
             default:
             $products = Product::where('status', 1)->inRandomOrder()->paginate($items_x_page_random);
                 break;

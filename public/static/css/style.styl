@@ -445,6 +445,7 @@ nav
         border 1px solid #e6e6e6
         color #e6e6e6
         width 40%
+        font-size .8em
         position relative
         margin-left 30%
         padding 8px
@@ -681,7 +682,53 @@ nav
     font-size 1.8em
     font-weight 700
 
-
+.store
+    margin-bottom 24px
+    .categories_list
+        background-color  #e7e6e7
+        border-radius 8px
+        h2.title
+            background-color #000101
+            border-radius 8px 8px 0px 0px
+            color #fff
+            display block
+            font-size 1.1em
+            padding 12px
+            margin 0px
+            a
+                text-decoration none
+                color #fff
+        ul
+            list-style none
+            margin 0px
+            padding 0px
+            li
+                border-bottom 1px solid #d6d6d6
+                &:last-child
+                    border 0px
+                    a
+                        border-radius 0px 0px 8px 8px
+                a
+                    color #000101
+                    display block
+                    text-decoration none
+                    font-size 1em
+                    padding 8px 12px
+                    img
+                        margin-right 8px
+                        width 36px
+                    &:hover
+                        background-color #24a3fc
+                        color #fff
+    h2.home_title
+        margin-top 0px
+        font-size  1.2em !important
+        margin-bottom 24px
+    .store_white
+        background-color #e7e6e7
+        border 1px solid #d9d9d9
+        border-radius 8px
+        padding 24px
 
 @media only screen and (max-width: 728px)
   nav
@@ -758,7 +805,8 @@ nav
         .inside
             padding 2px
 
-
+    .store_white
+        margin-top 24px
 @keyframes loading_image {
     0%{
         margin-left: -100px;

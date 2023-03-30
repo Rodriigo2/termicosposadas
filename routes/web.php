@@ -18,7 +18,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [ContentController::class, 'getHome'])->name('home');
 
-
+//Module Store
+Route::get('/store', 'App\Http\Controllers\StoreController@getStore')->name('store');
 
 //Routers AUTH
 

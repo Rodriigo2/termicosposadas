@@ -67,7 +67,7 @@
                         <a href="{{ url('/') }}" class="nav-link"><i class="fa-solid fa-house"></i> <span>Inicio</span></a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url('/') }}" class="nav-link"><i class="fa-solid fa-store"></i> <span>Tienda</span></a>
+                        <a href="{{ url('/store') }}" class="nav-link"><i class="fa-solid fa-store"></i> <span>Tienda</span></a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ url('/') }}" class="nav-link"><i class="fa-solid fa-id-card-clip"></i> <span>Sobre Nosotros</span></a>
