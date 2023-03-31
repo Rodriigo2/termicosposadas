@@ -18,6 +18,7 @@ window.onload = function(){
 }
 
 document.addEventListener('DOMContentLoaded', function(){
+    document.getElementsByClassName('lk-'+route)[0].classList.add('active');
     const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
     const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
     var loader = document.getElementById('loader');
@@ -59,6 +60,14 @@ document.addEventListener('DOMContentLoaded', function(){
             load_products('store');
         }
 
+        if(route == "store_category"){
+            load_products('store_category');
+        }
+
+        if(route == "search"){
+           
+        }
+
         if(route == "product_single"){
             var inventory = document.getElementsByClassName('inventory');
             for (i = 0; i < inventory.length; i++) {
@@ -66,14 +75,25 @@ document.addEventListener('DOMContentLoaded', function(){
     }
 
             // load_product_variants();
+            var amount_action = document.getElementsByClassName('amount_action');
+            for (i = 0; i < amount_action.length; i++) {
+                amount_action[i].addEventListener('click', function(e){
+                  e.preventDefault();
+                  product_single_amount(this.getAttribute('data-action'));  
+                });
         }
     }
-);
+});
 
 function load_products(section){
     loader.style.display = "flex";
-    page_section = section; 
-    var url = base + '/md/api/load/products/'+page_section+'?page='+page;
+    page_section = section;
+    if(section == "store_category"){
+    var object_id = document.getElementsByName('category_id')[0].getAttribute('content');
+    var url = base + '/md/api/load/products/'+page_section+'?page='+page+'&object_id='+object_id;
+    }else{
+        var url = base + '/md/api/load/products/'+page_section+'?page='+page;
+    }
     http.open('GET', url, true);
     http.setRequestHeader('X-CSRF-Token', csrfToken);
     http.send();
@@ -211,7 +231,24 @@ function load_product_variants(){
                     document.getElementById('variants').innerHTML += variant;
                 });
             }
-            console.log(data.length)
         }
     }
+}
+
+function product_single_amount(action){
+    var quantity = document.getElementById('add_to_cart_quantity');
+    var new_quantity;
+    if(action == "plus"){
+     new_quantity= parseInt(quantity.value) + parseInt(1);
+     quantity.value = parseInt(new_quantity);
+    }
+
+    if(action == "minus"){
+        if(parseInt(quantity.value) > 1){
+            new_quantity= parseInt(quantity.value) - parseInt(1);
+            quantity.value = parseInt(new_quantity);
+        }
+        
+   }
+
 }

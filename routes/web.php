@@ -18,8 +18,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [ContentController::class, 'getHome'])->name('home');
 
+//Module Cart
+Route::get('/cart', 'App\Http\Controllers\CartController@getCart')->name('cart');
+Route::post('/cart/product/{id}/add', 'App\Http\Controllers\CartController@postCartAdd')->name('cart_add');
+
 //Module Store
 Route::get('/store', 'App\Http\Controllers\StoreController@getStore')->name('store');
+Route::get('/store/category/{id}/{slug}', 'App\Http\Controllers\StoreController@getCategory')->name('store_category');
+Route::post('/search', 'App\Http\Controllers\StoreController@postSearch')->name('search');
 
 //Routers AUTH
 

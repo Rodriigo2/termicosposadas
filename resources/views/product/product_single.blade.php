@@ -50,7 +50,7 @@
                 </div>
 
                 <div class="add_cart">
-                    {!! Form::open(['url' => '/cart/add']) !!}
+                    {!! Form::open(['url' => '/cart/product/'.$product->id.'/add']) !!}
                     {!! Form::hidden('inventory', null, ['id' => 'field_inventory']) !!}
                     {!! Form::hidden('variant', null, ['id' => 'field_variant']) !!}
                     <div class="row">
@@ -79,7 +79,8 @@
                         </div>
                         </div>
                         <div class="col-md-4">
-                            <button type="submit" class="btn btn-success"><i class="fa-solid fa-cart-plus"></i> Agregar al carrito</button></div>
+                            <button type="submit" class="btn btn-success"><i class="fa-solid fa-cart-plus"></i> Agregar al carrito</button>
+                        </div>
                     </div>
                 </div>
                     {!! Form::close() !!}

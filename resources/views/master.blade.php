@@ -64,10 +64,10 @@
             <div class="collapse navbar-collapse" id="navigationMain">
                 <ul class="navbar-nav ms-auto"> <!-- Agrega la clase "ms-auto" aquí -->
                     <li class="nav-item">
-                        <a href="{{ url('/') }}" class="nav-link"><i class="fa-solid fa-house"></i> <span>Inicio</span></a>
+                        <a href="{{ url('/') }}" class="nav-link lk-home"><i class="fa-solid fa-house"></i> <span>Inicio</span></a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url('/store') }}" class="nav-link"><i class="fa-solid fa-store"></i> <span>Tienda</span></a>
+                        <a href="{{ url('/store') }}" class="nav-link lk-store lk-store_category lk-product_single"><i class="fa-solid fa-store"></i> <span>Tienda</span></a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ url('/') }}" class="nav-link"><i class="fa-solid fa-id-card-clip"></i> <span>Sobre Nosotros</span></a>
@@ -76,7 +76,7 @@
                         <a href="{{ url('/') }}" class="nav-link"><i class="fa-solid fa-address-book"></i> <span>Contactos</span></a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url('/car') }}" class="nav-link"><i class="fa-solid fa-cart-shopping"></i> <span class="carnumber">0</span></a>
+                        <a href="{{ url('/cart') }}" class="nav-link lk-cart"><i class="fa-solid fa-cart-shopping"></i> <span class="carnumber">0</span></a>
                     </li>
                     @if(Auth::guest())
                     <li class="nav-item link-acc">

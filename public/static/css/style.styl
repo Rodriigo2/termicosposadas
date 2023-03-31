@@ -1,5 +1,7 @@
 color1 = #e6e6e6
 color2 = #ffcc00
+color3 = #000101
+color4 = #24a3fc
 a
 .btn
     &:active
@@ -56,6 +58,9 @@ a
 .hidden
     display none
 
+.nomargin
+    margin 0px !important
+
 .form-control
     &:hover
     &:focus
@@ -68,8 +73,9 @@ body
 
 nav
     background-color color1
-    border-bottom 2px solid #020303
+    padding 0px !important
     .navbar-brand
+        padding 0px !important
         img
             width 200px
     .navbar-toggler
@@ -80,25 +86,28 @@ nav
    .navbar-nav
   li.nav-item
     a.nav-link
-      border-radius 4px
       color #020303
       font-size .9em
-      font-weight bold
       margin-right 4px
-      padding 5px 16px !important
+      margin-bottom -10px
+      padding 16px !important
       &:hover
         color #fff
         background-color #020303
+        border-bottom 2px solid #020303
+    a.active
+        border-bottom 2px solid #020303
     ul.dropdown-menu
         border-radius 0px 0px 4px 4px
         background-color #e6e6e6
         border 0px
-        top 175% !important
+        top 96% !important
         li
             border-bottom 1px solid #020303
             a
                 color #020303
                 display block
+                font-size .9em
                 float none
                 width 100%
                 i 
@@ -274,7 +283,7 @@ nav
     // border 1px solid #8C8888
     border-radius 4px
     padding 16px
-    margin-top 24px
+    margin-top 32px
     .categories
         position relative
         z-index: 99
@@ -288,11 +297,11 @@ nav
             text-decoration none
             width 100%
             &:hover
-                background-color #444444
+                background-color #24a3fc
         &:active
         &:focus
             a
-                background-color #444444
+                background-color #24a3fc
         &:hover
             ul
                 display block
@@ -730,8 +739,35 @@ nav
         border-radius 8px
         padding 24px
 
+
+.cart
+    .inside
+        padding 16px
+    .no_items
+        background-color #e7e6e7
+        border-radius 6px
+        display block
+        padding 32px
+        p
+            display block
+            text-align center
+            &:first-child
+                img   
+                    width 150px
+            &:last-child
+                margin-top 32px
+                a
+                    display inline-bloc
+                    border-radius 6px
+                    background-color color3
+                    color #fff
+                    padding 8px 16px
+                    text-decoration none
+                    text-transform uppercase
+
 @media only screen and (max-width: 728px)
   nav
+    padding 16px 8px  !important
     .navbar-nav
       display block !important
       margin-top 16px

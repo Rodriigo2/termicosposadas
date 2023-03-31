@@ -10,7 +10,11 @@
             <h2 class="title"><a href="#"><i class="fa-solid fa-bars-staggered"></i> Categorías</a></h2>
             <ul>
                 @foreach ($categories as $category)
-                <li><a href="#"><img src="{{url('/uploads/'.$category->file_path.'/'.$category->icono)}}" alt=""> {{ $category->name }}</a></li>
+                <li>
+                    <a href="{{url('/store/category/'.$category->id.'/'.$category->slug)}}">
+                        <img src="{{url('/uploads/'.$category->file_path.'/'.$category->icono)}}" alt=""> {{ $category->name }}
+                    </a>
+                </li>
                     
                 @endforeach
             </ul>
