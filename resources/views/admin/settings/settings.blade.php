@@ -76,6 +76,27 @@
                     </div>
                 </div>
                 </div>
+
+                <hr>
+
+                <div class="row mtop16">
+                    <div class="col-md-4">
+                        <label for="shipping_method">Configuración de precio de envió:</label>
+                    <div class="input-group">
+                        <div class="input-group-text"><i class="fa-solid fa-keyboard"></i></div>
+                    {!! Form::select('shipping_method', getShippingMethod() ,Config::get('termicosposadas.shipping_method'), ['class' => 'form-select']) !!}
+                    </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="shipping_default_value">Valor del envió:</label>
+                    <div class="input-group">
+                        <div class="input-group-text"><i class="fa-solid fa-keyboard"></i></div>
+                    {!! Form::number('shipping_default_value',Config::get('termicosposadas.shipping_default_value'), ['class' => 'form-select', 'min' => 1, 'required']) !!}
+                    </div>
+                    </div>
+                </div>
+
             <div class="row mtop16">
                 <div class="col-md-12">
                     {!! Form::submit('Guardar', ['class' => 'btn btn-success']) !!}

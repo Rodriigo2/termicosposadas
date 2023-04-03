@@ -21,6 +21,8 @@ Route::get('/', [ContentController::class, 'getHome'])->name('home');
 //Module Cart
 Route::get('/cart', 'App\Http\Controllers\CartController@getCart')->name('cart');
 Route::post('/cart/product/{id}/add', 'App\Http\Controllers\CartController@postCartAdd')->name('cart_add');
+Route::post('/cart/item/{id}/update', 'App\Http\Controllers\CartController@postCartItemQuantityUpdate')->name('cart_item_update');
+Route::get('/cart/item/{id}/delete', 'App\Http\Controllers\CartController@getCartItemDelete')->name('cart_item_delete');
 
 //Module Store
 Route::get('/store', 'App\Http\Controllers\StoreController@getStore')->name('store');

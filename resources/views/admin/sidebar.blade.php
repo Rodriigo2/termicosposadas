@@ -34,6 +34,11 @@
                 <a href="{{ url('/admin/orders/all') }}" class="lk-orders_list"><i class="fa-solid fa-clipboard-list"></i> Ordenes</a>
             </li>
             @endif
+            @if(kvfj(Auth::user()->permissions, 'coverage_list'))
+            <li>
+                <a href="{{ url('/admin/coverage') }}" class="lk-coverage_list"><i class="fa-solid fa-truck-fast"></i> Cobertura de envios</a>
+            </li>
+            @endif
             @if(kvfj(Auth::user()->permissions, 'user_list'))
             <li>
                 <a href="{{ url('/admin/users/all') }}" class="lk-user_list lk-user_edit lk-user_permissions"><i class="fa-solid fa-users"></i> Usuarios</a>

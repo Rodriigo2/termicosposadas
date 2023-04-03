@@ -34,7 +34,7 @@
                         <td width= "80"></td>
                         <td><strong>Producto</strong></td>
                         <td width="160"><strong>Cantidad</strong></td>
-                        <td width="100"><strong>Subtotal</strong></td>
+                        <td width="124"><strong>Subtotal</strong></td>
                     </tr>
                 </thead>
                 <tbody>
@@ -49,6 +49,14 @@
                             <td>
                                 <a href="{{url('/product/'.$item->getProduct->id.'/t_'.$item->getProduct->slug)}}">
                                     {{$item->label_item}}
+
+                                        <div class="price_discount">
+                                            Precio:
+                                            @if($item->discount_status == "1")
+                                            <span class="price_initial">{{ config('termicosposadas.currency').number_format($item->price_initial, 2, '.', ',')}}</span> / 
+                                            @endif
+                                            <span class="price_unit">{{ config('termicosposadas.currency').number_format($item->price_unit, 2, '.', ',')}} @if($item->discount_status=="1") ({{ $item->discount }}% de descuento) @endif</span>
+                                        </div>
                                 </a>
                             </td>
                             <td>
@@ -60,13 +68,60 @@
                                 </div>
                             </td>
                             <td>
-                                <strong>{{ config('termicosposadas.currency').' '.$item->total}}</strong>
+                                <strong>{{ config('termicosposadas.currency').' '.number_format($item->total, 2, '.', ',')}}</strong>
                             </td>
                         </tr>
                     @endforeach
+
+                    <tr>
+                        <td colspan="3"></td>
+                        <td><strong>Subtotal:</strong></td>
+                        <td><strong>{{ config('termicosposadas.currency').number_format($order->getSubTotal(), 2, '.', ',')}}</strong></td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="3"></td>
+                        <td><strong>Precio de envió:</strong></td>
+                        <td><strong>{{ config('termicosposadas.currency').number_format('0.00', 2, '.', ',')}}</strong></td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="3"></td>
+                        <td><strong>Total de la compra:</strong></td>
+                        <td><strong>{{ config('termicosposadas.currency').number_format('0.00', 2, '.', ',')}}</strong></td>
+                    </tr>
                 </tbody>
             </table>
         </div>
+        </div>
+        </div>
+        
+        <div class="col-md-3">
+            {!! Form::open(['url' => '/cart']) !!}
+            <div class="panel">
+                <div class="header">
+                    <h2 class="tittle"><i class="fa-solid fa-location-pin"></i> Dirección de envio</h2>
+                </div>
+            <div class="inside">
+            </div>
+            </div>
+
+            <div class="panel mtop16">
+                <div class="header">
+                    <h2 class="tittle"><i class="fa-solid fa-envelope-open"></i> Más</h2>
+                </div>
+            <div class="inside">
+                <label for="order_msg">Enviar Comentario:</label>
+                {!! Form::textarea('order_msg', null, ['class' => 'form-control', 'rows' => 3]) !!}
+            </div>
+            </div>
+
+            <div class="panel mtop16">
+            <div class="inside">
+                {!! Form::submit('Completar Compra', ['class' => 'btn btn-success']) !!}
+            </div>
+            </div>
+            {!! Form::close() !!}
         </div>
     </div>
 </div>

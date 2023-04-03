@@ -55,6 +55,9 @@ Route::prefix('/admin')->group(function(){
     Route::post('/slider/{id}/edit', 'App\Http\Controllers\Admin\SlidersController@postEditSlider')->name('sliders_edit');
     Route::get('/slider/{id}/delete', 'App\Http\Controllers\Admin\SlidersController@getDeleteSlider')->name('sliders_delete');
 
+
+    //Coverage
+    Route::get('/coverage', 'App\Http\Controllers\Admin\CoverageController@getList')->name('coverage_list');
     // Javascript Request
     Route::get('/md/api/load/subcategories/{parent}', ['uses' => 'App\Http\Controllers\Admin\ApiController@getSubCategories']);
 });

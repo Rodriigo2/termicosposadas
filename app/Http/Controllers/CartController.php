@@ -103,6 +103,7 @@ class CartController extends Controller
             $oitem->quantity = $request->input('quantity');
             $oitem->discount_status = $product->in_discount;
             $oitem->discount = $product->discount;
+            $oitem->discount_until_date = $product->discount_until_date;
             $oitem->price_initial = $inventory->price;
             $oitem->price_unit = $price;
             $oitem->total = $total;
@@ -118,6 +119,35 @@ class CartController extends Controller
     endif;    
 }
 
+public function postCartItemQuantityUpdate($id, Request $request ){
+    $order = $this->getUserOder();
+    $oitem = orderItem::find($id);
+    $inventory = Inventory::find($oitem->inventory_id);
+    //$product = Product::find($oitem->product_id);
+    if($order->id != $oitem->order_id):
+        return back()->with('message','No podemos actualizar la cantidad de este item.')->with('typealert','danger');
+    else: 
+        if($inventory->limited == "0"):
+            if($request->input('quantity')>$inventory->quantity ):
+                return back()->with('message','La cantidad ingresada supera al inventario.')->with('typealert','danger');
+            endif;
+        endif;
+        $total = $oitem->price_unit * $request->input('quantity');
+        $oitem->quantity = $request->input('quantity');
+        $oitem->total = $total;
+        if($oitem->save()):  
+            return back()->with('message','Cantidad actualizada con éxito.')->with('typealert','success');
+                endif;
+    endif;
+}
+
+    public function getCartItemDelete($id){
+        $oitem = orderItem::find($id);
+        if($oitem->delete()):  
+            return back()->with('message','Producto eliminado del carrito con éxito.')->with('typealert','success');
+                endif;
+    }
+
     public function getCalculatePrice($in_discount, $discount, $price){
         $final_price = $price;
         if($in_discount == "1"):
@@ -127,4 +157,5 @@ class CartController extends Controller
         endif;
         return $final_price;
     }
+
 }

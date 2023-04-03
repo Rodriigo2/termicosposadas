@@ -122,7 +122,15 @@ function user_permissions(){
             'keys' => [
                     'orders_list' => 'Puede ver el listado de ordenes.'
                 ]
+            ],
+            'coverage' => [
+                'icon' => '<i class="fa-solid fa-truck-fast"></i>',
+                'title' => 'Cobertura de envios',
+                'keys' =>[
+                    'coverage_list' => 'Puede ver la lista de cobertura de envios',
+                    'coverage_add' => 'Puede crear zonas de envió.'
                 ]
+            ]
     ];
     return $p;
 }
@@ -155,4 +163,30 @@ function getMoths($mode, $key){
     }else{
         return $m[$key];
     }
+}
+
+function getShippingMethod($method = null){
+    $status = [
+        '0' => 'Gratis',
+        '1' => 'Valor fijo',
+        '2' => 'Precio variable por ubicación.',
+        '3' => 'Valor fijo por producto'
+    ];
+    if(is_null($method)):
+        return $status;
+    else:
+        return $status[$method];
+endif;
+}
+
+function getCoverageType($type = null){
+    $status = [
+        '0' => 'Provincia',
+        '1' => 'Ciudad'
+    ];
+    if(is_null($type)):
+        return $status;
+    else:
+        return $status[$type];
+endif;
 }
