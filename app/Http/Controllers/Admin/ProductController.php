@@ -146,6 +146,7 @@ class ProductController extends Controller
             endif;
             $product->in_discount= $request->input('indiscount');
             $product->discount= $request->input('discount');
+            $product->discount_until_date= $request->input('discount_until_date');
             $product->content= e($request->input('content'));
             if($product->save()):
                 $this->getUpdateMinPrice($product->id);

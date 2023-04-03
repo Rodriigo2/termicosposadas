@@ -14,6 +14,6 @@ class order extends Model
     protected $hidden = ['created_at', 'updated_at'];
 
     public function getItems(){
-        return $this->hasMany(orderItem::class, 'id', 'order_id');
+        return $this->hasMany(orderItem::class, 'order_id', 'id')->with(['getProduct']);
     }
 }

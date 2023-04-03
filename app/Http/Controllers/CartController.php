@@ -57,8 +57,36 @@ class CartController extends Controller
         if($request->input('quantity')< 1):
             return back()->with('message','Es necesario ingresar la cantidad de productos')->with('typealert','danger');
         else:
+
+            if($inventory->limited=="0"):
+                if($request->input('quantity') > $inventory->quantity):
+                    return back()->with('message','Hay un problema: ingresó más productos de los que tenemos en inventario. Por favor revise y ajuste la cantidad. Gracias.')->with('typealert','danger');
+                endif;
+            endif;
+
+            if(count(collect($inventory->getVariants)) > "0"):
+                if(is_null($request->input('variant'))):
+                    return back()->with('message','Seleccione todas las opciones del producto.')->with('typealert','danger');
+                endif;
+            endif;
+
+            if(!is_null($request->input('variant'))):
+            $variant = Variant::where('id', $request->input('variant'))->count();
+            if($variant == "0"):
+                return back()->with('message','Selección no encontrada.')->with('typealert','danger');
+            else:
+                $variant = Variant::find($request->input('variant'));
+                if($variant->inventory_id != $inventory->id):
+                return back()->with('message','Selección no válida.')->with('typealert','danger');
+            endif;
+            endif;
+        endif;
+
+            $query = orderItem::where('order_id' , $order->id)->where('product_id', $product->id)->count();
+            if($query == 0):
             $oitem = new orderItem;
-            $total = $product->price * $request->input('quantity');
+            $price = $this->getCalculatePrice($product->in_discount, $product->discount, $inventory->price);
+            $total = $price * $request->input('quantity');
             if($request->input('variant')):
             $variant = Variant::find($request->input('variant'));
             $variant_label = ' / '.$variant->name;
@@ -73,16 +101,30 @@ class CartController extends Controller
             $oitem->variant_id = $request->input('variant');
             $oitem->label_item = $label;
             $oitem->quantity = $request->input('quantity');
-            $oitem->discount_status = $request->in_discount;
-            $oitem->discount = $request->discount;
-            $oitem->price_unit = $product->price;
+            $oitem->discount_status = $product->in_discount;
+            $oitem->discount = $product->discount;
+            $oitem->price_initial = $inventory->price;
+            $oitem->price_unit = $price;
             $oitem->total = $total;
-
             if($oitem->save()):  
                 return back()->with('message','Producto agregado al carrito de compras con éxito.')->with('typealert','success');
+                    endif;
+                else:
+                    return back()->with('message','Este producto ya se encuentra en su carrito de compras.')->with('typealert','danger');
+                endif;
+                endif;
             endif;
         endif;
-    endif;
-endif;endif;
+    endif;    
+}
+
+    public function getCalculatePrice($in_discount, $discount, $price){
+        $final_price = $price;
+        if($in_discount == "1"):
+        $discount_value = '0.'.$discount;
+        $discount_calc = $price * $discount_value;
+        $final_price = $price - $discount_calc;
+        endif;
+        return $final_price;
     }
 }
