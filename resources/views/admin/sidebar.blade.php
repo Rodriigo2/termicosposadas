@@ -36,7 +36,7 @@
             @endif
             @if(kvfj(Auth::user()->permissions, 'coverage_list'))
             <li>
-                <a href="{{ url('/admin/coverage') }}" class="lk-coverage_list"><i class="fa-solid fa-truck-fast"></i> Cobertura de envios</a>
+                <a href="{{ url('/admin/coverage') }}" class="lk-coverage_list lk-coverage_edit"><i class="fa-solid fa-truck-fast"></i> Cobertura de envios</a>
             </li>
             @endif
             @if(kvfj(Auth::user()->permissions, 'user_list'))

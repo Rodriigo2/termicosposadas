@@ -49,9 +49,14 @@ Route::get('/product/{id}/{slug}', 'App\Http\Controllers\ProductController@getPr
 Route::get('/account/edit', [UserController::class, 'getAccountEdit'])->name('account_edit');
 Route::post('account/edit/avatar', [UserController::class, 'postAccountAvatar'])->name('account_avatar_edit');Route::post('account/edit/password', [UserController::class, 'postAccountPassword'])->name('account_password_edit');
 Route::post('account/edit/info', [UserController::class, 'postAccountInfo'])->name('account_info_edit');
+Route::get('/account/address', [UserController::class, 'getAccountAddress'])->name('account_address');
+Route::post('/account/address/add', [UserController::class, 'postAccountAddressAdd'])->name('account_address');
+Route::get('/account/address/{address}/setdefault', [UserController::class, 'getAccountAddressSetDefault'])->name('account_address');
+Route::get('/account/address/{address}/delete', [UserController::class, 'getAccountAddressDelete'])->name('account_address');
 
 //Ajax API Routers
 Route::get('/md/api/load/products/{section}', ['uses' => 'App\Http\Controllers\ApiJsController@getProductsSection'])->name('products_section');
 Route::post('/md/api/favorites/add/{object}/{module}', ['uses' => 'App\Http\Controllers\ApiJsController@postFavoriteAdd']);
 Route::post('/md/api/load/user/favorites', ['uses' => 'App\Http\Controllers\ApiJsController@postUserFavorites']);
 Route::post('/md/api/load/product/inventory/{inv}/variants', ['uses' => 'App\Http\Controllers\ApiJsController@postProductInventoryVariants']);
+Route::post('/md/api/load/cities/{state}', ['uses' => 'App\Http\Controllers\ApiJsController@postCoverageCitiesFromState']);

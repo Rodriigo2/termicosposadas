@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Validator, Image, Str, Auth, Config, Hash;
 
 use App\Models\User;
+use App\Http\Models\Coverage;
+use App\Http\Models\UserAddress;
 
 class UserController extends Controller
 {
@@ -128,6 +130,83 @@ class UserController extends Controller
             if($u->save()):
                 return back()->with('message','Su información se actualizo con éxito')->with('typealert','success');
                 endif;
+        endif;
+    }
+
+    public function getAccountAddress(){
+        $states = Coverage::where('ctype', '0')->pluck('name','id');
+        $data = ['states' => $states];
+        return view('user.account_address', $data);
+    }
+
+    public function postAccountAddressAdd(Request $request){
+        $rules = [
+            'name' => 'required',
+            'state' => 'required',
+            'city' => 'required',
+            'add1' => 'required',
+            'add2' => 'required',
+            'add3' => 'required'
+        ];
+    
+        $messages = [
+            'name.required' => 'Es requerido un nombre para la dirección.',
+            'state.required' => 'Seleccione una provincia.',
+            'city.required' => 'Seleccione una ciudad.',
+            'add1.required' => 'Ingrese el nombre de su localidad o barrio.',
+            'add2.required' => 'Ingrese su calle / avenida.',
+            'add3.required' => 'Ingrese el número de casa / departamento.'
+        ];
+    
+        $validator = Validator::make($request->all(), $rules, $messages);
+        if($validator->fails()):
+            return back()->withErrors($validator)->with('message','Se ha producido un error')->with('typealert','danger')->withInput();
+        else:
+            $address = new UserAddress;
+            $address->name = e($request->input('name'));
+            $address->user_id = Auth::id();
+            $address->state_id = $request->input('state');
+            $address->city_id = $request->input('city');
+            $info = ['add1' => e($request->input('add1')), 'add2' => e($request->input('add2')), 'add3' => e($request->input('add3')), 'add4' => e($request->input('add4'))];
+            $address->addr_info = json_encode($info);
+            if(count(collect(Auth::user()->getAddress))== "0"):
+                $address->default = "1";
+            endif;
+            if($address->save()):
+                return back()->with('message','La dirección fue guardada con éxito')->with('typealert','success');
+                endif;
+        endif;
+    }
+
+    public function getAccountAddressSetDefault(UserAddress $address){
+        if(Auth::id() != $address->user_id):
+            return back()->with('message','No puede editar esta dirección de entrega')->with('typealert','danger');
+        else:
+            //Remove default prew address
+            //$default = Auth::user()->getAddressDefault->id;
+            $default = UserAddress::find(Auth::user()->getAddressDefault->id);
+            $default->default = "0";
+            $default->save();
+
+            //New Default Address  
+            $address->default = "1";
+            if($address->save()):
+                return back()->with('message','La dirección se asigno como dirección principal de entrega')->with('typealert','success');
+                endif;
+        endif;
+    }
+
+    public function getAccountAddressDelete(UserAddress $address){
+        if(Auth::id() != $address->user_id):
+            return back()->with('message','No tienes permiso para eliminar esta dirección.')->with('typealert','danger');
+        else:
+            if($address->default == "0"):
+            if($address->detele()):
+                return back()->with('message','La dirección se elimino con éxito.')->with('typealert','success');
+            endif;
+        else:
+            return back()->with('message','No se puede eliminar una dirección principal.')->with('typealert','danger');
+        endif;
         endif;
     }
 }

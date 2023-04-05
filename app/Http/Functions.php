@@ -128,7 +128,9 @@ function user_permissions(){
                 'title' => 'Cobertura de envios',
                 'keys' =>[
                     'coverage_list' => 'Puede ver la lista de cobertura de envios',
-                    'coverage_add' => 'Puede crear zonas de envió.'
+                    'coverage_add' => 'Puede crear zonas de envió.',
+                    'coverage_edit' => 'Puede editar zonas de envió.',
+                    'coverage_delete' => 'Puede eliminar zonas de envió.'
                 ]
             ]
     ];
@@ -170,7 +172,7 @@ function getShippingMethod($method = null){
         '0' => 'Gratis',
         '1' => 'Valor fijo',
         '2' => 'Precio variable por ubicación.',
-        '3' => 'Valor fijo por producto'
+        '3' => 'Envió gratis / Monto Mínimo'
     ];
     if(is_null($method)):
         return $status;
@@ -188,5 +190,17 @@ function getCoverageType($type = null){
         return $status;
     else:
         return $status[$type];
+endif;
+}
+
+function getCoverageStatus($status = null){
+    $list = [
+        '0' => 'No activo',
+        '1' => 'Activo'
+    ];
+    if(is_null($status)):
+        return $list;
+    else:
+        return $list[$status];
 endif;
 }

@@ -18,7 +18,10 @@ window.onload = function(){
 }
 
 document.addEventListener('DOMContentLoaded', function(){
-    document.getElementsByClassName('lk-'+route)[0].classList.add('active');
+    var page_route_name = document.getElementsByClassName('lk-'+route)[0];
+    if(page_route_name){
+        page_route_name.classList.add('active');
+    }
     const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
     const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
     var loader = document.getElementById('loader');
@@ -64,8 +67,15 @@ document.addEventListener('DOMContentLoaded', function(){
             load_products('store_category');
         }
 
+        if(route == 'account_address'){
+            var state = document.getElementById('state');
+            if(state){
+                state.addEventListener('change',load_cities);
+            }
+            load_cities();
+        }
+
         if(route == "search"){
-           
         }
 
         if(route == "product_single"){
@@ -82,6 +92,10 @@ document.addEventListener('DOMContentLoaded', function(){
                   product_single_amount(this.getAttribute('data-action'));  
                 });
         }
+    }
+    btn_deleted = document.getElementsByClassName('btn-deleted');
+    for (i = 0; i < btn_deleted.length; i++) {
+        btn_deleted[i].addEventListener('click', delete_object);
     }
 });
 
@@ -251,4 +265,60 @@ function product_single_amount(action){
         
    }
 
+}
+
+function load_cities(){
+    loader.style.display = "flex";
+    state_id = document.getElementById('state');
+    var cities_select = document.getElementById('address_city');
+    cities_select.innerHTML = "";
+    var url = base + '/md/api/load/cities/'+state_id.value;
+    //var params = 'module=1&objects='+objects;
+    http.open('POST', url, true);
+    http.setRequestHeader('X-CSRF-Token', csrfToken);
+    //http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    
+    http.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            loader.style.display = "none";
+            var data = this.responseText;
+            data = JSON.parse(data);
+            if(data.length > 0){
+                data.forEach(function(element, index){
+                    cities_select.innerHTML += '<option value="'+element.id+'">'+element.name+'</option>'
+                })
+            }
+        }
+    }
+    http.send();
+}
+
+function delete_object(e){
+    e.preventDefault();
+    var object = this.getAttribute('data-object');
+    var action = this.getAttribute('data-action');
+    var path = this.getAttribute('data-path');
+    var url = base + '/' + path + '/' + object + '/'+ action;
+    var title, text, icon;
+    if(action == "delete"){
+        title = "¿Estas seguro de eliminar este objeto?";
+        text = "Recuerda que esta acción enviara este elemento a la papelera o lo eliminara de forma definitiva";
+        icon = "warning";
+    }
+    if(action == "restore"){
+        title = "¿Quieres restaurar este elemento?";
+        text = "Esta acción restaurará este elemento y estará en la base de datos";
+        icon = "info";
+    }
+    swal.fire({
+        title: title,
+        text: text,
+        icon: icon,
+        showCancelButton: true,
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = url;
+        }
+      });
 }

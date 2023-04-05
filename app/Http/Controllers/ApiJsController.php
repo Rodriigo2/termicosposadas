@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Config, Auth;
-use App\Http\Models\Product, App\Http\Models\Favorite, App\Http\Models\Inventory,App\Http\Models\Category;
+use App\Http\Models\Product, App\Http\Models\Favorite, App\Http\Models\Inventory,App\Http\Models\Category, App\Http\Models\Coverage;
 
 class ApiJsController extends Controller
 {
@@ -77,6 +77,11 @@ class ApiJsController extends Controller
     public function postProductInventoryVariants($id){
         $query = Inventory::find($id);
         return response()->json($query->getVariants);
+    }
+
+    public function postCoverageCitiesFromState($state){
+        $cities = Coverage::Where('ctype', '1')->where('state_id', $state)->get();
+        return response()->json($cities);
     }
 
 }

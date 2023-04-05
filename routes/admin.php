@@ -58,6 +58,15 @@ Route::prefix('/admin')->group(function(){
 
     //Coverage
     Route::get('/coverage', 'App\Http\Controllers\Admin\CoverageController@getList')->name('coverage_list');
+    Route::post('/coverage/state/add', 'App\Http\Controllers\Admin\CoverageController@postCoverageStateAdd')->name('coverage_add');
+    Route::post('/coverage/city/add', 'App\Http\Controllers\Admin\CoverageController@postCoverageCityAdd')->name('coverage_add');
+    Route::get('/coverage/{id}/edit', 'App\Http\Controllers\Admin\CoverageController@getCoverageEdit')->name('coverage_edit');
+    Route::get('/coverage/city/{id}/edit', 'App\Http\Controllers\Admin\CoverageController@getCoverageCityEdit')->name('coverage_edit');
+    Route::post('/coverage/city/{id}/edit', 'App\Http\Controllers\Admin\CoverageController@postCoverageCityEdit')->name('coverage_edit');
+    Route::post('/coverage/state/{id}/edit', 'App\Http\Controllers\Admin\CoverageController@postCoverageStateEdit')->name('coverage_edit');
+    Route::get('/coverage/{id}/cities', 'App\Http\Controllers\Admin\CoverageController@getCoverageCities')->name('coverage_list');
+    Route::get('/coverage/{id}/delete', 'App\Http\Controllers\Admin\CoverageController@getCoverageDelete')->name('coverage_delete');
+
     // Javascript Request
     Route::get('/md/api/load/subcategories/{parent}', ['uses' => 'App\Http\Controllers\Admin\ApiController@getSubCategories']);
 });

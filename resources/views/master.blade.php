@@ -84,8 +84,8 @@
                         <a href="{{ url('/register') }}" class="nav-link btn"><i class="fa-solid fa-user"></i> Crear Cuenta</a>
                     </li>
                     @else
-                    <li class="nav-item link-acc link-user dropdown">
-                        <a href="{{ url('/login') }}" class="nav-link btn dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <li class="nav-item link-acc link-user dropdown ">
+                        <a href="{{ url('/login') }}" class="nav-link btn dropdown-toggle lk-account_address" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             @if(is_null(Auth::user()->avatar))
                              <img src="{{url('/static/images/default-avatar.png')}}">
                              @else 
@@ -98,6 +98,10 @@
                                 </li>
                                 {{-- <li><hr class="dropdown-divider"></li> --}}
                                 @endif
+
+                                <li>
+                                    <a class="dropdown-item" href="{{ url('/account/address') }}"><i class="fa-solid fa-map-location-dot"></i> Mis Direcciones</a>
+                                </li>
 
                                 <li>
                                     <a class="dropdown-item" href="{{ url('/account/favorites') }}"><i class="fa-solid fa-heart"></i> Favoritos</a>
